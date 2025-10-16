@@ -1,10 +1,9 @@
 import { defineConfig } from 'vite'
 
 // https://vitejs.dev/config/
-export default defineConfig({
-  // Базовый путь для GitHub Pages
-  // Замените 'cosmUnity' на название вашего репозитория
-  base: '/cosm-unity/',
+export default defineConfig(({ command }) => ({
+  // Для локальной разработки используем '/', для продакшн билда '/cosm-unity/'
+  base: command === 'serve' ? '/' : '/cosm-unity/',
   
   build: {
     // Директория для собранных файлов
@@ -33,5 +32,5 @@ export default defineConfig({
 //   preview: {
 //     port: 4173,
 //   },
-})
+}))
 
