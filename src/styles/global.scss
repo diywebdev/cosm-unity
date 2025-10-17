@@ -5,10 +5,23 @@ body {
     min-height: 100vh;
     min-width: 320px;
     overflow-x: hidden;
+    font-family: var(--font-family);
+    font-weight: 400;
 }
 
 main {
     flex-grow: 1;
+}
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: var(--third-family);
+    font-weight: 500;
+}
+
+a, button, .btn {
+    font-family: var(--second-family);
+    font-weight: 600;
 }
 
 .container {
