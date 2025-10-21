@@ -1,1 +1,8 @@
 @use '../helpers' as *;
+
+.logo{
+    img{
+        height: fluid(50, 35);
+        width: auto;
+    }
+}

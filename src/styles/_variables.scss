@@ -19,11 +19,12 @@
   --font-family-accent: 'Rubik', sans-serif;
   --font-family-link: 'Inter', sans-serif;
 
-  --headerHeight: 80px;  
-  --headerOffset: 30px;
+  // --headerHeight: 80px;  
+  --headerHeight: #{fluid(80, 55)};
+  --headerOffset: #{fluid(30, 13)};
 
   --container-width: #{rem(1335)};
-  --container-padding-x: #{rem(20)};
+  --container-padding-x: #{rem(16)};
 
   --transition-duration: 0.2s;
 
