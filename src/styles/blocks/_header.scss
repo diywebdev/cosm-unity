@@ -1,0 +1,32 @@
+@use '../helpers' as *;
+
+.header{
+    position: sticky;
+    top: rem(30);
+    &__inner{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        column-gap: rem(5);
+        padding-block: rem(15);
+        background-color: #fff;
+        border-radius: rem(40);
+    }
+
+    &__nav{
+        ul{
+            display: flex;
+            column-gap: rem(30);
+        }
+        li{
+            a{
+                display: inline-flex;
+                padding: rem(7) rem(8);
+                text-decoration: none;
+            }
+        }
+    }
+    &__actions{
+        display: flex;
+    }
+}

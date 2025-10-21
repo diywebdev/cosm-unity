@@ -3,3 +3,8 @@
 @use 'variables';
 @use 'utils';
 @use 'globals';
+
+@use 'blocks/header';
+@use 'blocks/logo';
+@use 'blocks/search';
+@use 'blocks/language';
