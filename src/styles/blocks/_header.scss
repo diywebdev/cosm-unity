@@ -17,12 +17,12 @@
         ul{
             display: flex;
             column-gap: rem(30);
-        }
-        li{
-            a{
-                display: inline-flex;
-                padding: rem(7) rem(8);
-                text-decoration: none;
+            li{
+                a{
+                    display: inline-flex;
+                    padding: rem(7) rem(8);
+                    text-decoration: none;
+                }
             }
         }
     }
