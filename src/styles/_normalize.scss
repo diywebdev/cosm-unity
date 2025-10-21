@@ -1,10 +1,10 @@
 /**
   Нормализация блочной модели
  */
-* {
+*,
+::before,
+::after {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
 }
 
 /**
@@ -20,7 +20,7 @@
   у которых есть атрибут class
  */
 body,
-:where(blockquote, figure, fieldset):where([class]) {
+:where(blockquote, figure):where([class]) {
   margin: 0;
 }
 
@@ -48,6 +48,7 @@ body,
 }
 
 :where(fieldset[class]) {
+  margin-left: 0;
   padding: 0;
   border: none;
 }
@@ -115,10 +116,26 @@ html {
     при появлении / исчезновении скроллбара
    */
   scrollbar-gutter: stable;
-  /**
-    Плавный скролл
-   */
+}
+
+/**
+  Плавный скролл
+ */
+html,
+:has(:target) {
   scroll-behavior: smooth;
+}
+
+body {
+  /**
+    Пригодится в большинстве ситуаций
+    (когда, например, нужно будет "прижать" футер к низу сайта)
+   */
+  min-height: 100%;
+  /**
+    Унифицированный интерлиньяж
+   */
+  line-height: 1.5;
 }
 
 /**
@@ -137,49 +154,16 @@ label {
 }
 
 /**
-  Убирает серую подсветку при тапе на мобильных устройствах (iOS/Android)
- */
-button {
-  -webkit-tap-highlight-color: transparent;
-}
-
-/**
   Приводим к единому цвету svg-элементы
-  (за исключением тех, у которых уже указан
-  атрибут fill со значением 'none' или начинается с 'url')
  */
-:where([fill]:not(
-  [fill="none"],
-  [fill^="url"]
-)) {
-  fill: currentColor;
-}
-
-/**
-  Приводим к единому цвету svg-элементы
-  (за исключением тех, у которых уже указан
-  атрибут stroke со значением 'none')
- */
-:where([stroke]:not(
-  [stroke="none"],
-  [stroke^="url"]
-)) {
-  stroke: currentColor;
-}
+[fill] { fill: currentColor }
+[stroke] { stroke: currentColor }
 
 /**
   Чиним баг задержки смены цвета при взаимодействии с svg-элементами
  */
 svg * {
   transition-property: fill, stroke;
-}
-
-/**
-  Приведение рамок таблиц в классический 'collapse' вид
- */
-:where(table) {
-  border-collapse: collapse;
-  border-color: currentColor;
 }
 
 /**

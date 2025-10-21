@@ -1,0 +1,100 @@
+@use 'helpers' as *;
+
+html {
+  &.is-lock {
+    overflow: hidden;
+  }
+}
+
+body {
+  @include fluid-text(18, 16);
+
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-family-base);
+  color: var(--color-text);
+  background-color: var(--color-light);
+}
+
+main {
+  flex-grow: 1;
+}
+
+h1, .h1,
+h2, .h2,
+h3, .h3,
+h4, .h4,
+h5, .h5,
+h6, .h6  {
+  color: var(--color-dark-blue);
+  font-family: var(--font-family-accent);
+  font-weight: 500;
+}
+
+h1, .h1 {
+  @include fluid-text(105, 55);
+
+  line-height: 1;
+}
+
+h2, .h2 {
+  @include fluid-text(37, 31);
+}
+
+h3, .h3 {
+  font-size: rem(20);
+  line-height: 1.3;
+
+  @include mobile-s {
+    font-size: rem(21);
+  }
+}
+
+h4, .h4 {
+  @include fluid-text(26, 18);
+}
+
+h5, .h5 {
+  @include fluid-text(24, 18);
+}
+
+h6, .h6 {
+  @include fluid-text(20, 16);
+}
+
+p {
+  --paragraphMarginBottom: #{rem(24)};
+}
+
+a,
+button,
+label,
+input,
+textarea,
+select,
+svg * {
+  transition-duration: var(--transition-duration);
+}
+
+a {
+  color: inherit;
+
+  @include hover {
+    color: var(--color-accent);
+  }
+
+  &[class] {
+    text-decoration: none;
+  }
+}
+
+:focus-visible {
+  outline: rem(2) dashed var(--color-text);
+  outline-offset: rem(4);
+  transition-duration: 0s !important;
+}
+
+a,
+button {
+  font-family: var(--font-family-link);
+}
