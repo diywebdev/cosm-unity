@@ -34,6 +34,12 @@
     &__title{
         margin-bottom: rem(24);
     }
+    &__description{
+        @include fluid-text(21, 18);
+
+        line-height: 1.63;
+        color: var(--color-dark-blue);
+    }
     &__right{
         flex-grow: 1;
         margin-right: rem(-32);
