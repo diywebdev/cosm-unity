@@ -3,6 +3,20 @@
 .header{
     position: sticky;
     top: rem(30);
+    background-color: transparent;
+
+    animation: scrollTo forwards;
+    animation-range: rem(50) rem(100);
+    animation-timeline: scroll();
+
+    @keyframes scrollTo {
+        to {
+            top: 0;
+            background-color: #fff;
+            box-shadow: 0 rem(5) rem(50) rgba(#102B3B, 0.1);
+        }
+    }
+
     &__inner{
         display: flex;
         align-items: center;
