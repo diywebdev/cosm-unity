@@ -1,20 +1,18 @@
 @use '../helpers' as *;
 
 .header{
-    position: sticky;
-    top: rem(30);
+    position: fixed;
+    width: 100%;
+    left: 0;
     background-color: transparent;
+    box-shadow: none;
+    transition: all .2s;
+    top: rem(30);
 
-    animation: scrollTo forwards;
-    animation-range: rem(50) rem(100);
-    animation-timeline: scroll();
-
-    @keyframes scrollTo {
-        to {
-            top: 0;
-            background-color: #fff;
-            box-shadow: 0 rem(5) rem(50) rgba(#102B3B, 0.1);
-        }
+    &.fixed{
+        top: 0;
+        background-color: #fff;
+        box-shadow: 0 rem(5) rem(50) rgba(#102B3B, 0.1);
     }
 
     &__inner{
@@ -22,8 +20,9 @@
         align-items: center;
         justify-content: space-between;
         column-gap: rem(5);
-        padding-block: rem(15);
+        height: rem(80);
         background-color: #fff;
+        padding-inline: var(--container-padding-x);
         border-radius: rem(40);
     }
 
@@ -34,13 +33,20 @@
             li{
                 a{
                     display: inline-flex;
-                    padding: rem(7) rem(8);
+                    padding: rem(13) rem(8);
                     text-decoration: none;
+                    font-weight: 600;
+                    font-size: rem(16);
                 }
             }
         }
+        @include tablet{
+            display: none;
+        }
     }
+
     &__actions{
         display: flex;
+        align-items: center;
     }
 }
