@@ -1,1 +1,44 @@
 @use '../helpers' as *;
+
+.language{
+    --bdrs: #{fluid(26, 18)};
+    position: relative;
+
+    &:hover{
+        .language-btn{
+            border-radius: var(--bdrs) var(--bdrs) 0 0;
+        }
+        .language-list{
+            @include show;
+        }
+    }
+
+    &-btn{
+        border-radius: var(--bdrs);
+        background-color: var(--color-accent);
+        padding: fluid(14, 10) fluid(30, 20);
+        transition: border-radius var(--transition-duration);
+        color: #5B5A5A;
+    }
+
+    &-list{
+        @include hide;
+
+        position: absolute;
+        top: 100%;
+        right: 0;
+        min-width: 100%;
+        width: fit-content;
+        background-color: #fff;
+        box-shadow: 0 rem(10) rem(10) rgba(0,0,0,.2);
+        border-radius: 0 0 var(--bdrs) var(--bdrs);
+        transition: all var(--transition-duration);
+    }
+
+    &-link{
+        display: block;
+        text-align: center;
+        padding: rem(5) 0;
+        @include fluid-text(20, 15);
+    }
+}

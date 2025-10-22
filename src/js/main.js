@@ -17,3 +17,22 @@ document.addEventListener('scroll', () => {
 //     // hideHeaderPos = $siteHeader.querySelector('header').clientHeight;
 // });
 
+
+// MENU
+
+const menuBtn = document.querySelector('.menu-btn');
+const closeMenuBtn = document.querySelector('.close-menu-btn');
+const menuWrapper = document.querySelector('.header__nav--wrapper');
+
+menuBtn.addEventListener('click', () => {
+    menuWrapper.classList.add('isActive');
+    document.documentElement.classList.add('is-lock');
+});
+
+closeMenuBtn.addEventListener('click', () => {
+    if(menuWrapper.classList.contains('isActive')) {
+        menuWrapper.classList.remove('isActive');
+        document.documentElement.classList.remove('is-lock');
+    };
+});
+

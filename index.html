@@ -22,39 +22,61 @@
             <img src="/img/logo-vertical.svg" alt="CosmUnity" width="217" height="49">
           </a>
 
-          <nav class="header__nav">
-            <ul class="header__nav--list">
-              <li>
-                <a href="#catalog">Каталог</a>
-              </li>
-              <li>
-                <a href="#about-books">О книгах</a>
-              </li>
-              <li>
-                <a href="#authors">Авторы</a>
-              </li>
-              <li>
-                <a href="#news">Новости</a>
-              </li>
-              <li>
-                <a href="#faq">Вопросы</a>
-              </li>
-              <li>
-                <a href="#reviews">Отзывы</a>
-              </li>
-              <li>
-                <a href="#contacts">Контакты</a>
-              </li>
-            </ul>
-          </nav>
+          <div class="header__nav--wrapper">
+
+            <button class="close-menu-btn" title="Закрыть меню">
+              <img src="/img/icons/close.svg" alt="Close menu">
+            </button>
+
+            <nav class="header__nav">
+              <ul class="header__nav--list">
+                <li>
+                  <a href="#catalog">Каталог</a>
+                </li>
+                <li>
+                  <a href="#about-books">О книгах</a>
+                </li>
+                <li>
+                  <a href="#authors">Авторы</a>
+                </li>
+                <li>
+                  <a href="#news">Новости</a>
+                </li>
+                <li>
+                  <a href="#faq">Вопросы</a>
+                </li>
+                <li>
+                  <a href="#reviews">Отзывы</a>
+                </li>
+                <li>
+                  <a href="#contacts">Контакты</a>
+                </li>
+              </ul>
+            </nav>
+          </div>          
 
           <div class="header__actions">
-            <div class="header__actions--search">
-              <button type="button" class="header__actions--search-button"><img src="/img/icons/search.svg" alt="Search button" /></button>
+
+            <div class="header__actions--search search">
+              <button type="button" class="search-button" title="Поиск по сайту">
+                <img src="/img/icons/search.svg" alt="Search button" />
+              </button>
             </div>
-            <div class="header__actions--language">
-              RU
+
+            <div class="header__actions--language language">
+              <button class="language-btn h4" type="button" title="Выбор языка">RU</button>
+              <ul class="language-list">
+                <li class="language-item">
+                  <a href="#" class="language-link">EN</a>
+                </li>
+                <li class="language-item">
+                  <a href="#" class="language-link">ES</a>
+                </li>
+              </ul>
             </div>
+
+            <button type="button" class="menu-btn" title="Открыть меню"><span></span><span></span><span></span></button>
+
           </div>
 
         </div>

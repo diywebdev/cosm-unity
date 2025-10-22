@@ -1,1 +1,20 @@
 @use '../helpers' as *;
+
+.search{
+    display: inline-flex;
+    align-items: center;
+
+    &-button{
+        @include hover{
+            opacity: 0.9;
+        }
+        img{
+            width: fluid(22, 20);
+            height: auto;
+        }
+    }
+
+    @include mobile{
+        display: none;
+    }
+}
