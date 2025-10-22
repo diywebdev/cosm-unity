@@ -36,3 +36,36 @@ closeMenuBtn.addEventListener('click', () => {
     };
 });
 
+// SEARCH
+const searchBtn = document.querySelector('.search-button');
+const searchForm = document.querySelector('.search-form');
+
+searchBtn.addEventListener('click', () => {
+    searchForm.classList.toggle('isActive');
+    setTimeout(() => {
+        if(searchForm.classList.contains('isActive')) {
+            searchForm.classList.add('open');
+            searchForm.querySelector('input').focus();
+        }else{
+            searchForm.classList.remove('open');
+            searchForm.reset();
+        }
+    }, 0);
+});
+
+document.addEventListener('click', (e) => {    
+    if(!e.target.closest('.search-button') && !e.target.closest('.search-form')) {
+        if(searchForm.classList.contains('isActive')) {
+            searchForm.classList.remove('isActive');
+            searchForm.classList.remove('open');
+            searchForm.reset();
+        };
+    };
+});
+
+document.addEventListener('keydown', (e) => {
+    if(e.key === 'Escape') {
+        searchForm.classList.remove('open');
+        searchForm.classList.remove('isActive');
+    };
+});

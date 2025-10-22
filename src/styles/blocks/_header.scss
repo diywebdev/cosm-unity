@@ -106,5 +106,9 @@
         @include tablet{
             padding-right: rem(8);
         }
+
+        &--search{
+            position: relative;
+        }
     }
 }
