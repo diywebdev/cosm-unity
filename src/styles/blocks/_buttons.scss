@@ -1,0 +1,20 @@
+@use '../helpers' as *;
+
+.btn,
+.button {
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-accent);
+    color: var(--color-dark-blue);
+    // font-size: rem(18);
+    font-weight: 600;
+    padding: fluid(16, 14) rem(90);
+    border-radius: rem(60);
+
+    @include hover {
+        color: var(--color-dark-blue);
+        background-color: rgba(var(--color-accent-rgb), .8);
+    }
+}
