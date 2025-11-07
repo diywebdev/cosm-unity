@@ -1,0 +1,22 @@
+@use '../helpers' as *;
+
+.soc1al{
+    &__link{
+        svg{
+            fill: transparent;
+            stroke: currentColor;
+            height: rem(32);
+            width: auto;
+        }
+        img{
+            height: rem(32);
+            width: auto;
+        }
+
+        @include hover{
+            img{
+                opacity: 0.8;
+            }
+        }
+    }
+}

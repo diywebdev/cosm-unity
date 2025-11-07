@@ -1,0 +1,82 @@
+@use '../helpers' as *;
+
+.footer {
+    padding: rem(100) 0 rem(50);
+    background-color: var(--color-gray-deep);
+    color: #ffffff;
+
+    a:not([class]){
+        text-decoration: none;
+        color: #d1d1d1;
+        
+        @include hover {
+            color: var(--color-accent);
+        }
+    }
+
+    &__row {
+        display: flex;
+        align-items: start;
+        justify-content: space-between;
+        gap: rem(16);
+        padding-bottom: rem(60);
+    }
+
+    &__logo{
+        img{
+            max-width: rem(160);
+            width: 100%;
+            height: auto;
+        }
+    }
+
+    &__menu{
+        flex-grow: 1;
+        ul{
+            display: flex;
+            justify-content: center;
+            gap: rem(30);
+            li{
+                a{
+                    display: inline-block;
+                    text-decoration: none;
+                    font-size: rem(16);
+                    font-weight: 600;
+                }
+            }
+        }
+    }
+
+    &__contacts{
+        display: flex;
+        flex-direction: column;
+        gap: rem(22);
+        h3{
+            color: #fff;
+            line-height: 1;
+        }
+    }
+
+    &__soc1al{
+        display: flex;
+        align-items: center;
+        gap: rem(20);
+    }
+
+    &__links{
+        padding-top: rem(20);
+        border-top: 1px solid rgba(#fff, .88);
+
+        &--wrapper{
+            display: inline-flex;
+            flex-direction: column;
+            gap: rem(5);
+
+            a{
+                font-size: rem(16);
+                font-weight: 300;
+            }
+        }
+    }
+
+}
