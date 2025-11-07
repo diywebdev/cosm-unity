@@ -52,7 +52,7 @@
                     font-weight: 600;
                     font-size: rem(16);
                     @include laptop{
-                        font-size: rem(14);
+                        font-size: rem(12);
                     }
                     @include tablet{
                         font-size: rem(20);
@@ -67,6 +67,7 @@
         }
         &--wrapper{
             @include tablet-above{
+                transition: none;
                 transform: translateX(0) !important;
             }
 

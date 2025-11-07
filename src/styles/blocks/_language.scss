@@ -19,6 +19,9 @@
         padding: fluid(14, 10) fluid(30, 20);
         transition: border-radius var(--transition-duration);
         color: #5B5A5A;
+        font-weight: 600;
+        
+        @include fluid-text(18, 14);
     }
 
     &-list{
@@ -38,7 +41,7 @@
     &-link{
         display: block;
         text-align: center;
-        padding: rem(5) 0;
-        @include fluid-text(20, 15);
+        padding: rem(10) 0;
+        @include fluid-text(18, 14);
     }
 }

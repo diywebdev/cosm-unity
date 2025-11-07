@@ -16,9 +16,10 @@
     }
     &__left{
         padding-top: rem(80);
-        display: flex;
+        display: inline-flex;
         flex-direction: column;
         justify-content: space-between;
+        gap: rem(20);
         padding-bottom: rem(20);
         width: rem(600);
 
@@ -52,6 +53,21 @@
         }
         @include mobile{
             margin-left: rem(16);
+        }
+    }
+    .btn, 
+    .button {
+        align-self: start;
+
+        max-width: rem(300);
+        width: 100%;
+
+        @include mobile {
+            margin-inline: auto;
+        }
+
+        @include mobile-s {
+            width: 100%;
         }
     }
 }
