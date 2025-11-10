@@ -1,9 +1,9 @@
 @use '../helpers' as *;
 
 .section{
-    padding-block: fluid(90, 40);
+    padding-block: fluid(90, 50);
     &:nth-child(even){
-        background-color: #fff;
+        background-color: #fff; // TMP
     }
     
     &__head{
