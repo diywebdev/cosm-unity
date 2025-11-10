@@ -34,7 +34,7 @@
     --container-width: #{rem(1280)};
   }
 
-  @include mobile-s{
-    --container-padding-x: #{rem(10)};
-  }
+  // @include mobile-s{
+  //   --container-padding-x: #{rem(10)};
+  // }
 }
