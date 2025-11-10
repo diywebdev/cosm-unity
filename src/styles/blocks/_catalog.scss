@@ -5,12 +5,33 @@
     &__list{
         display: grid;
         grid-template-columns: repeat(5, 1fr);
-        gap: fluid(65, 65);
+        column-gap: fluid(65, 0);
+        row-gap: fluid(65, 30);
+
+        @include laptop{
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        @include tablet{
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        @include mobile{
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        @include mobile-s{
+            grid-template-columns: repeat(1, 1fr);
+        }
     }
     &__card{
         position: relative;
-        max-width: 300px;
+        max-width: rem(225);
         width: 100%;
+
+        @include laptop{
+            max-width: 100%;
+        }
 
         article{
             height: 100%;

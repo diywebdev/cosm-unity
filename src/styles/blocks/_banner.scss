@@ -60,9 +60,6 @@
     .button {
         align-self: start;
 
-        max-width: rem(300);
-        width: 100%;
-
         @include mobile {
             margin-inline: auto;
         }
