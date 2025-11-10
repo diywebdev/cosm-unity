@@ -8,6 +8,7 @@
     box-shadow: none;
     transition: all .2s;
     top: var(--headerOffset);
+    z-index: 1000;
 
     &.fixed{
         top: 0;
