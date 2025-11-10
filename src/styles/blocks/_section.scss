@@ -1,0 +1,26 @@
+@use '../helpers' as *;
+
+.section{
+    padding-block: fluid(90, 40);
+    &:nth-child(even){
+        background-color: #fff;
+    }
+    
+    &__head{
+        display: flex;
+        align-items: start;
+        justify-content: space-between;
+        gap: rem(16);
+
+        &.center{
+            justify-content: center;
+            .section__head--title{
+                text-align: center;
+            }
+        }
+
+        &--title{
+            margin-bottom: fluid(50, 30);
+        }
+    }
+}
