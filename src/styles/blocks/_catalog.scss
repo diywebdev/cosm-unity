@@ -1,0 +1,96 @@
+@use '../helpers' as *;
+
+.catalog {
+
+    &__list{
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: fluid(65, 65);
+    }
+    &__card{
+        position: relative;
+        max-width: 300px;
+        width: 100%;
+
+        article{
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        &--content{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            flex-grow: 1;
+        }
+
+        &--lang{
+            position: absolute;
+            background-color: var(--color-accent);
+            color: #313131;
+            z-index: 1;
+            width: fluid(38, 33);
+            height: fluid(38, 33);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            top: fluid(10, 6);
+            right: fluid(10, 6);
+            font-weight: bold;
+
+            @include fluid-text(14, 12)
+        }
+
+        &--image{
+            border-radius: rem(22);
+            overflow: hidden;
+            background-color: var(--color-accent);
+            box-shadow: 0px 9px 35px rgba(0, 0, 0, 0.2);
+            aspect-ratio: 1 / 1.5;
+            position: relative;
+            transition: all var(--transition-duration);
+            margin-bottom: fluid(16, 12);
+
+            img{
+                position: absolute;
+                inset: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: center bottom;
+                border-radius: rem(22);
+                transition: transform var(--transition-duration);
+            }
+
+            @include hover{
+                box-shadow: 0px 9px 35px rgba(0, 0, 0, 0.1);
+                img{
+                    transform: scale(.99);
+                }
+            }
+        }
+
+        &--excerpt{
+            font-size: fluid(14, 12);
+            font-weight: 300;
+            margin-bottom: fluid(10, 8);
+            color: rgba(0, 0, 0, .55);
+        }
+
+        &--title{
+            font-size: fluid(20, 18);
+            font-weight: 600;
+            font-family: var(--font-family-base);
+            margin-bottom: fluid(8, 6);
+            color: var(--color-dark);
+        }
+        &--author{
+            font-size: fluid(16, 14);
+            font-weight: 600;
+            color: rgba(0, 0, 0, .6);
+        }
+    }
+
+}
