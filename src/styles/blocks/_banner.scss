@@ -2,6 +2,7 @@
 
 .banner{
     overflow: hidden;
+    padding-top: calc(var(--headerHeight) + var(--headerOffset) * 2);
     &__inner{
         display: flex;
         column-gap: rem(20);
