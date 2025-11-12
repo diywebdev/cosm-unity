@@ -1,6 +1,7 @@
 @use '../helpers' as *;
 
 .catalog {
+    overflow-x: hidden;
 
     &__list{
         display: grid;
@@ -24,13 +25,23 @@
             grid-template-columns: repeat(1, 1fr);
         }
     }
+
+    &__slider{
+        overflow: visible !important;
+        // > .swiper-wrapper{
+        //     flex-direction: row;
+        // }
+    }
+
     &__card{
         position: relative;
-        max-width: rem(225);
-        width: 100%;
+        height: auto !important;
+        // margin-top: 0 !important;
+        // max-width: rem(225);
+        // width: 100%;
 
         @include laptop{
-            max-width: 100%;
+            // max-width: 100%;
         }
 
         article{
