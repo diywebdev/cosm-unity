@@ -1,0 +1,86 @@
+@use '../helpers' as *;
+
+.about-books{
+    padding-block: fluid(70, 40);
+    z-index: 1;
+
+    &__bg{
+        position: absolute;
+        width: 50%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        z-index: -1;
+        object-fit: cover;
+        object-position: right top;
+        border-radius: 0 rem(50) rem(50) 0;
+        filter: drop-shadow(0px 8.77603px 35.1041px rgba(0, 0, 0, 0.2));
+        overflow: hidden;
+
+
+        @include mobile{
+            width: 96%;
+            height: 88%;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: rem(50);
+        }
+
+        @include mobile-s{
+            width: 92%;
+            // height: 88%;
+            border-radius: rem(30);
+        }
+    }
+
+    &__content{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+
+        @include mobile{
+            grid-template-columns: repeat(1, 1fr);
+            row-gap: rem(50);
+        }
+    }
+
+    &__left{
+        padding-right: fluid(65, 24);
+
+        @include mobile{
+            padding-left: rem(70);
+            padding-right: rem(45);
+        }
+
+        @include mobile-s{
+            padding-inline: rem(16);
+        }
+
+        p{
+            margin-bottom: fluid(115, 60);
+
+            @include fluid-text(23, 16);
+
+            line-height: fluid(36, 29);
+        }
+    }
+
+    &__more{
+        @include mobile{
+            justify-content: center;
+        }
+        .btn, .button{
+            @include mobile-s{
+                width: 100%;
+                min-width: 0;
+            }
+        }
+    }
+
+    &__right{
+        padding-left: fluid(65, 24);
+
+        @include mobile{
+            padding-left: 0;
+        }
+    }
+}

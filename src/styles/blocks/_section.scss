@@ -1,10 +1,8 @@
 @use '../helpers' as *;
 
 .section{
+    position: relative;
     padding-block: fluid(90, 50);
-    &:nth-child(even){
-        background-color: #fff; // TMP
-    }
     
     &__head{
         display: flex;
