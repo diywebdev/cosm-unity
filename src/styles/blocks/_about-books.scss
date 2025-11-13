@@ -1,36 +1,15 @@
 @use '../helpers' as *;
 
 .about-books{
-    padding-block: fluid(70, 40);
+    padding-block: 0;
     z-index: 1;
 
-    &__bg{
-        position: absolute;
-        width: 50%;
-        height: 100%;
-        left: 0;
-        top: 0;
-        z-index: -1;
-        object-fit: cover;
-        object-position: right top;
-        border-radius: 0 rem(50) rem(50) 0;
-        filter: drop-shadow(0px 8.77603px 35.1041px rgba(0, 0, 0, 0.2));
-        overflow: hidden;
+    background-size: 50% 100%;
+    background-repeat: no-repeat;
+    background-position: left top;
 
-
-        @include mobile{
-            width: 96%;
-            height: 88%;
-            left: 50%;
-            transform: translateX(-50%);
-            border-radius: rem(50);
-        }
-
-        @include mobile-s{
-            width: 92%;
-            // height: 88%;
-            border-radius: rem(30);
-        }
+    @include mobile{
+        background-image: none !important;
     }
 
     &__content{
@@ -48,12 +27,22 @@
     }
 
     &__left{
+        padding-block: fluid(70, 40);
         padding-right: fluid(65, 24);
         color: var(--color-dark-blue);
 
+        @include mobile-above{
+            background-image: none !important;
+        }
+
         @include mobile{
             padding-left: rem(70);
-            padding-right: rem(45);
+            padding-right: rem(55);
+            padding-bottom: rem(100);
+
+            background-size: cover;
+            background-position: center top;
+            
         }
 
         @include mobile-s{
@@ -78,33 +67,44 @@
     }
 
     &__right{
+        padding-block: fluid(70, 40);
         padding-left: fluid(65, 24);
         position: relative;
         
         @include mobile{
-            padding-left: 0;
+            padding-left: rem(24);
+            padding-top: 0;
         }
 
         .custom-scroll{
             max-height: rem(590);
+
+            @include mobile{
+                max-height: rem(335);
+                overflow: hidden;
+            }
         }
 
         &::after{
             content: '';
             position: absolute;
             left: 0;
-            top: 85%;
+            top: 75%;
             width: 100%;
             height: rem(140);
             background: linear-gradient(180deg, rgba(242, 242, 242, 0) 0%, var(--color-light) 100%);
             filter: blur(6px);
+
+            @include mobile{
+                display: none;
+            }
         }
 
 
         ol{
             list-style: none;
             padding: 0;
-            padding-right: fluid(80, 40);
+            padding-right: fluid(80, 30);
             margin: 0;
             display: flex;
             flex-direction: column;
@@ -114,5 +114,13 @@
                 line-height: 1.4;
             }
         }
+    }
+
+    .more-link{
+        font-style: italic;
+        text-decoration: underline;
+        font-weight: bold;
+        display: inline-block;
+        width: fit-content;
     }
 }
