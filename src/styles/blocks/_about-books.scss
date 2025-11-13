@@ -37,6 +37,10 @@
         display: grid;
         grid-template-columns: repeat(2, 1fr);
 
+        @include fluid-text(23, 16);
+
+        line-height: fluid(36, 29);
+
         @include mobile{
             grid-template-columns: repeat(1, 1fr);
             row-gap: rem(50);
@@ -45,6 +49,7 @@
 
     &__left{
         padding-right: fluid(65, 24);
+        color: var(--color-dark-blue);
 
         @include mobile{
             padding-left: rem(70);
@@ -57,10 +62,6 @@
 
         p{
             margin-bottom: fluid(115, 60);
-
-            @include fluid-text(23, 16);
-
-            line-height: fluid(36, 29);
         }
     }
 
@@ -78,9 +79,40 @@
 
     &__right{
         padding-left: fluid(65, 24);
-
+        position: relative;
+        
         @include mobile{
             padding-left: 0;
+        }
+
+        .custom-scroll{
+            max-height: rem(590);
+        }
+
+        &::after{
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 85%;
+            width: 100%;
+            height: rem(140);
+            background: linear-gradient(180deg, rgba(242, 242, 242, 0) 0%, var(--color-light) 100%);
+            filter: blur(6px);
+        }
+
+
+        ol{
+            list-style: none;
+            padding: 0;
+            padding-right: fluid(80, 40);
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: fluid(25, 10);
+
+            li{
+                line-height: 1.4;
+            }
         }
     }
 }

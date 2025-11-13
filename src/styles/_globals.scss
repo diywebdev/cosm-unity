@@ -108,3 +108,26 @@ nav ul{
   padding: 0;
   margin: 0;
 }
+
+.custom-scroll{
+  overflow-y: auto;
+
+  /* Style the entire scrollbar */
+  &::-webkit-scrollbar {
+    width: 2px;
+  }
+
+  /* Style the track */
+  &::-webkit-scrollbar-track {
+    background: var(--color-text);
+  }
+
+  /* Style the thumb */
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--color-accent);
+  }
+}
+
+strong, b{
+  font-weight: 700;
+}
