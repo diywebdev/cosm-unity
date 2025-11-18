@@ -11,8 +11,7 @@
         font-size: rem(16);
 
         span{
-            border-bottom: 1px solid currentColor;
-            transition: border var(--transition-duration);
+            text-decoration: underline;
         }
 
         svg{
@@ -22,10 +21,15 @@
 
         }
 
-        &:hover{
+        @include hover{
             span{
-                border-bottom: none;
+                text-decoration: none;
             }
+        }
+
+        &-mobile{
+            text-align: center;
+            margin-top: rem(60);
         }
     }
 
