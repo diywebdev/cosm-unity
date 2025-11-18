@@ -12,12 +12,6 @@ document.addEventListener('scroll', () => {
     }
 });
 
-// window.addEventListener('resize', () => {
-//     // this.open = false;
-//     // hideHeaderPos = $siteHeader.querySelector('header').clientHeight;
-// });
-
-
 // MENU
 
 const menuBtn = document.querySelector('.menu-btn');
@@ -69,3 +63,22 @@ document.addEventListener('keydown', (e) => {
         searchForm.classList.remove('isActive');
     };
 });
+
+// About books
+
+const hiddenAboutBooksItems = () => {
+    const aboutBooksItems = document.querySelectorAll('.about-books__list ol li');
+    if(aboutBooksItems.length > 5) {
+        aboutBooksItems.forEach((item, index) => {
+            if(index > 4 && window.innerWidth <= 767) {
+                item.classList.add('hidden');
+            }else{
+                item.classList.remove('hidden');
+            }
+        });
+    }
+}
+
+hiddenAboutBooksItems();
+
+window.addEventListener('resize', hiddenAboutBooksItems);

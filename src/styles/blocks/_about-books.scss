@@ -94,11 +94,8 @@
             max-height: rem(590);
 
             @include mobile{
-                max-height: rem(335);
+                max-height: none;
                 overflow: hidden;
-            }
-            @include mobile-s{
-                max-height: rem(431);
             }
         }
 

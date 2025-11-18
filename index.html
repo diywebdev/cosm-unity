@@ -32,7 +32,7 @@
             <nav class="header__nav">
               <ul class="header__nav--list">
                 <li>
-                  <a href="#catalog">Editions</a>
+                  <a href="#editions">Editions</a>
                 </li>
                 <li>
                   <a href="#about-books">About the Books</a>
@@ -109,7 +109,7 @@
 
     <main>
 
-      <section class="section catalog" id="catalog">
+      <section class="section catalog" id="editions">
         <div class="container">
           <div class="section__head">
             <h2 class="section__head--title">Editions</h2>
@@ -117,7 +117,7 @@
 
           <div class="catalog catalog__slider swiper">
 
-            <div class="swiper-wrapper">
+            <ul class="swiper-wrapper">
 
               <li class="catalog__card swiper-slide">
                 <article>
@@ -250,7 +250,7 @@
                 </article>
               </li>
 
-            </div>
+            </ul>
 
           </div>
 
@@ -286,7 +286,7 @@
 
             <div class="about-books__right">
 
-              <div class="custom-scroll">
+              <div class="about-books__list custom-scroll">
                 <ol>
                   <li>creation and development of the multidimensional structure of the human soul</li>
                   <li>energetic characteristics of the soul’s incarnation in various forms and worlds</li>
@@ -327,11 +327,72 @@
         </div>
       </section>
 
-      <section class="section" id="news">
+      <section class="section news" id="news">
         <div class="container">
+
           <div class="section__head">
             <h2 class="section__head--title">News</h2>
+            <a href="javascript:void(0)" class="news__archive--link hidden-mobile">
+              <span>News archive</span>
+              <svg width="29" height="29" viewBox="0 0 29 29" fill="transparent" xmlns="http://www.w3.org/2000/svg"><path d="M9.62109 2.40479V6.0126" stroke="currentColor" stroke-width="1.13931" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/><path d="M19.2422 2.40479V6.0126" stroke="currentColor" stroke-width="1.13931" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/><path d="M4.20898 10.9314H24.6533" stroke="currentColor" stroke-width="1.13931" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/><path d="M25.2543 10.2219V20.444C25.2543 24.0518 23.4504 26.4571 19.2413 26.4571H9.62045C5.41133 26.4571 3.60742 24.0518 3.60742 20.444V10.2219C3.60742 6.61407 5.41133 4.20886 9.62045 4.20886H19.2413C23.4504 4.20886 25.2543 6.61407 25.2543 10.2219Z" stroke="currentColor" stroke-width="1.13931" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/><path d="M18.8759 16.4754H18.8867" stroke="currentColor" stroke-width="1.51908" stroke-linecap="round" stroke-linejoin="round"/><path d="M18.8759 20.0831H18.8867" stroke="currentColor" stroke-width="1.51908" stroke-linecap="round" stroke-linejoin="round"/><path d="M14.4248 16.4754H14.4356" stroke="currentColor" stroke-width="1.51908" stroke-linecap="round" stroke-linejoin="round"/><path d="M14.4248 20.0831H14.4356" stroke="currentColor" stroke-width="1.51908" stroke-linecap="round" stroke-linejoin="round"/><path d="M9.97556 16.4754H9.98636" stroke="currentColor" stroke-width="1.51908" stroke-linecap="round" stroke-linejoin="round"/><path d="M9.97556 20.0831H9.98636" stroke="currentColor" stroke-width="1.51908" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
           </div>
+
+          <div class="news__slider swiper">
+            <ul class="swiper-wrapper">
+
+              <li class="swiper-slide">
+                <article class="news__item">
+
+                  <time datetime="2025-08-27">27/08</time>
+                  <div class="news__item--image">
+                    <img src="/img/news/1.jpg" width="289" height="190" alt="Comprehensive Book Collection">
+                  </div>
+                  <h3 class="news__item--title">Comprehensive Book Collection</h3>
+                  <div class="news__item--excerpt">Find thousands of books across genres and languages, from bestsellers to classics <a href="javascript:void(0)" title="More">...</a></div>
+
+                </article>
+              </li>
+              <li class="swiper-slide">
+                <article class="news__item">
+
+                  <time datetime="2025-08-26">26/08</time>
+                  <div class="news__item--image">
+                    <img src="/img/news/2.jpg" width="289" height="190" alt="Comprehensive Book Collection">
+                  </div>
+                  <h3 class="news__item--title">Comprehensive Book Collection</h3>
+                  <div class="news__item--excerpt">Find thousands of books across genres and languages, from bestsellers to classics <a href="javascript:void(0)" title="More">...</a></div>
+
+                </article>
+              </li>
+              <li class="swiper-slide">
+                <article class="news__item">
+
+                  <time datetime="2025-08-25">25/08</time>
+                  <div class="news__item--image">
+                    <img src="/img/news/3.jpg" width="289" height="190" alt="Comprehensive Book Collection">
+                  </div>
+                  <h3 class="news__item--title">Comprehensive Book Collection</h3>
+                  <div class="news__item--excerpt">Find thousands of books across genres and languages, from bestsellers to classics <a href="javascript:void(0)" title="More">...</a></div>
+
+                </article>
+              </li>
+              <li class="swiper-slide">
+                <article class="news__item">
+
+                  <time datetime="2025-08-27">27/08</time>
+                  <div class="news__item--image">
+                    <img src="/img/news/1.jpg" width="289" height="190" alt="Comprehensive Book Collection">
+                  </div>
+                  <h3 class="news__item--title">Comprehensive Book Collection</h3>
+                  <div class="news__item--excerpt">Find thousands of books across genres and languages, from bestsellers to classics <a href="javascript:void(0)" title="More">...</a></div>
+
+                </article>
+              </li>
+
+            </ul>
+          </div>
+
         </div>
       </section>
 
