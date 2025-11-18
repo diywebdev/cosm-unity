@@ -84,4 +84,38 @@
             -webkit-line-clamp: 3;
         }
     }
+
+    .container{
+        position: relative;
+    }
+
+    &__slider--prev,
+    &__slider--next{
+
+        --btnWidth: #{fluid(50, 30)};
+
+        position: absolute;
+        top: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: var(--btnWidth);
+        height: var(--btnWidth);
+        border-radius: rem(20);
+        border: 2px solid var(--color-accent);
+        cursor: pointer;
+        z-index: 1;
+    }
+    &__slider--prev{
+        left: -4%;
+        @media (max-width: 1500px){
+            left: 0;
+        }
+    }
+    &__slider--next{
+        right: -4%;
+        @media (max-width: 1500px){
+            right: 0;
+        }
+    }
 }
