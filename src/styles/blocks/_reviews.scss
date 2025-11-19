@@ -37,17 +37,19 @@
 
         &--prev,
         &--next{
-            background-color: #fff;
-            border-color: #fff;
-            
-            @include hover{
-                border-color: var(--color-accent);
-            }
+            @include mobile-above{
+                background-color: #fff;
+                border-color: #fff;
+                
+                @include hover{
+                    border-color: var(--color-accent);
+                }
 
-            &.swiper-button-disabled{
-                background-color: #fff !important;
-                &:hover{
-                    border-color: #fff !important;
+                &.swiper-button-disabled{
+                    background-color: #fff !important;
+                    &:hover{
+                        border-color: #fff !important;
+                    }
                 }
             }
         }
