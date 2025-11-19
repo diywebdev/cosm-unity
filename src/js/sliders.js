@@ -48,6 +48,10 @@ const catalogSlider = new Swiper(".catalog__slider", {
 
 const newsSlider = new Swiper(".news__slider", {
 	loop: false,
+	navigation: {
+		nextEl: '.news__slider--next',
+		prevEl: '.news__slider--prev',
+	},
 	breakpoints: {
 		320: {
 			slidesPerView: 1.3,

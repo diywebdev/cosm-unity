@@ -1,9 +1,35 @@
 @use './functions' as *;
 
+$xxl: 1511.98;
+$xl: 1279.98;
 $laptop: 1334.98;
 $tablet: 1023.98;
 $mobile: 767.98;
 $mobile-s: 480.98;
+
+@mixin xxl-above {
+  @media (width > rem($xxl)) {
+    @content;
+  }
+}
+
+@mixin xxl {
+  @media (width <= rem($xxl)) {
+    @content;
+  }
+}
+
+@mixin xl-above {
+  @media (width > rem($xl)) {
+    @content;
+  }
+}
+
+@mixin xl {
+  @media (width <= rem($xl)) {
+    @content;
+  }
+}
 
 @mixin laptop-above {
   @media (width > rem($laptop)) {
