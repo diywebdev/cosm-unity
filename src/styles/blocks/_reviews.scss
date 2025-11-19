@@ -1,0 +1,108 @@
+@use '../helpers' as *;
+
+.reviews{
+    padding: 0;
+
+    h2{
+        line-height: 1;
+    }
+
+    .container{
+        margin-block: fluid(90, 50);
+        background-size: fluid(450, 233);
+        background-repeat: no-repeat;
+
+        @include mobile{
+            background-image: none !important;
+        }
+
+    }
+
+    &__slider{
+
+        @include mobile-above{
+            background-color: #D0C6AC;
+            border-radius: fluid(34, 27) 0 fluid(34, 27) 0;
+            margin: fluid(59, 0) 0 0 fluid(154, 60);
+            padding: rem(40) rem(60) rem(56) 0;
+        }
+    }
+
+    &__slide{
+
+        --paddingLeft: #{rem(120)};
+
+        @include mobile{
+            --paddingLeft: #{rem(20)};
+            background-color: #D0C6AC;
+            border-radius: rem(30) 0 rem(30) 0;
+            padding: var(--paddingLeft) var(--paddingLeft) var(--paddingLeft) 0;
+        }
+
+        &--time{
+            font-weight: 600;
+            font-size: rem(16);
+            line-height: 1.65;
+            color: #171C1F;
+            margin-bottom: rem(4);
+            padding-left: var(--paddingLeft);
+
+            @include mobile{
+                color: var(--color-text);
+            }
+        }
+
+        &--author{
+            font-size: rem(23);
+            font-weight: 600;
+            color: var(--color-dark-blue);
+            padding-left: var(--paddingLeft);
+        }
+
+        &--content{
+            @include mobile-above{
+                @include custom-scroll;
+            }
+
+            padding-left: var(--paddingLeft);
+            padding-top: rem(70);
+            position: relative;
+            padding-right: rem(60);
+            max-height: rem(420);
+
+            @include mobile{
+                padding-right: 0;
+                overflow: hidden;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 10;
+            }
+
+            * {
+                font-size: fluid(18, 16);
+                line-height: 1.65;
+                color: var(--color-dark-blue);
+            }
+
+            &::before{
+                content: '“';
+                font-size: fluid(130, 100);
+                font-weight: 500;
+                font-family: var(--font-family-link);
+                line-height: 1;
+                font-style: normal;
+                color: var(--color-dark-blue);
+                position: fixed;
+                left: rem(40);
+                top: rem(70);
+                z-index: 10;
+
+                @include mobile{
+                    position: absolute;
+                    left: var(--paddingLeft);
+                    top: rem(10);
+                }
+            }
+        }
+    }
+}

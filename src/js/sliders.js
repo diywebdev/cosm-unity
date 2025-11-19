@@ -71,3 +71,26 @@ const newsSlider = new Swiper(".news__slider", {
 		}
 	}
 });
+
+
+const reviewsSlider = new Swiper(".reviews__slider", {
+	loop: false,
+	// navigation: {
+	// 	nextEl: '.news__slider--next',
+	// 	prevEl: '.news__slider--prev',
+	// },
+	breakpoints: {
+		320: {
+			slidesPerView: 1,
+			spaceBetween: 20,
+		},
+		640: {
+			slidesPerView: 2,
+			spaceBetween: 20,
+		},
+		768: {
+			slidesPerView: 1,
+			spaceBetween: 20,
+		}
+	}
+});
