@@ -1,0 +1,89 @@
+@use '../helpers' as *;
+
+.faq{
+
+    &__list{
+        display: grid;
+        gap: fluid(14, 10);
+    }
+
+    &__item{
+        --faqPaddingY: #{rem(10)};
+        --faqPaddingX: #{fluid(35, 22)};
+
+        background-color: #fff;
+        padding-block: var(--faqPaddingY);
+        padding-inline: var(--faqPaddingX);
+        border-radius: rem(24);
+
+        &.is-active{
+            .faq__item--content{
+                // display: block;
+                max-height: 300px;
+                opacity: 1;
+                visibility: visible;
+                margin-top: var(--faqPaddingY);
+                transition: opacity 0.1s ease, max-height 0.1s ease;
+
+                @include custom-scroll;
+
+                @include mobile {
+                    max-height: 600px;
+                }
+            }
+            .faq__item--icon{
+                transform: rotate(-90deg);
+            }
+        }
+
+        &--head{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+
+        &--title{
+            font-size: rem(18);
+            line-height: 1;
+            font-weight: 600;
+        }
+
+        &--icon{
+            width: fluid(32, 28);
+            height: fluid(32, 28);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform-origin: center;
+            transition-duration: var(--transition-duration);
+        }
+
+        &--content{
+            max-height: 0;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.1s ease, max-height 0.1s ease;
+            *{
+                font-size: fluid(18, 16);
+                line-height: fluid(32, 26);
+            }
+            p:where(:not([class]):not(:last-child)) {
+                margin-bottom: rem(10);
+            }
+            ul{
+                list-style: none;
+                li{
+                    display: flex;
+                    align-items: center;
+                    gap: rem(6);
+
+                    &::before{
+                        content: '-';
+                    }
+                }
+            }
+        }
+    }
+    
+}

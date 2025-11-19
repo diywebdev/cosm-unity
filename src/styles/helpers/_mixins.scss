@@ -62,3 +62,22 @@
   clip: rect(0 0 0 0) !important;
   overflow: hidden !important;
 }
+
+@mixin custom-scroll {
+  overflow-y: auto;
+
+  /* Style the entire scrollbar */
+  &::-webkit-scrollbar {
+    width: 2px;
+  }
+
+  /* Style the track */
+  &::-webkit-scrollbar-track {
+    background: var(--color-text);
+  }
+
+  /* Style the thumb */
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--color-accent);
+  }
+}
