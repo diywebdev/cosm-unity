@@ -122,6 +122,11 @@
             position: absolute;
             top: 50%;
         }
+
+        img{
+            width: calc(var(--btnWidth) / 2.5);
+            height: auto;
+        }
         
         &.swiper-button-disabled{
 
