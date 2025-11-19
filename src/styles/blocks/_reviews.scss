@@ -26,6 +26,31 @@
             margin: fluid(59, 0) 0 0 fluid(154, 60);
             padding: rem(40) rem(60) rem(56) 0;
         }
+
+        &--nav{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: fluid(57, 37);
+            column-gap: fluid(33, 20);
+        }
+
+        &--prev,
+        &--next{
+            background-color: #fff;
+            border-color: #fff;
+            
+            @include hover{
+                border-color: var(--color-accent);
+            }
+
+            &.swiper-button-disabled{
+                background-color: #fff !important;
+                &:hover{
+                    border-color: #fff !important;
+                }
+            }
+        }
     }
 
     &__slide{

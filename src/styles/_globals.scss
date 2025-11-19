@@ -120,3 +120,40 @@ nav ul{
 strong, b{
   font-weight: 700;
 }
+
+.slider-btn{
+  --btnWidth: #{fluid(50, 36)};
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--btnWidth);
+  height: var(--btnWidth);
+  border-radius: fluid(20, 10);
+  border: 2px solid var(--color-accent);
+  cursor: pointer;
+  transition: all var(--transition-duration);
+  z-index: 1;
+
+  @include hover{
+      background-color: var(--color-accent);
+  }
+
+  img{
+      width: calc(var(--btnWidth) / 2.5);
+      height: auto;
+  }
+
+  &.swiper-button-disabled{
+    opacity: 0.6;
+    background-color: transparent !important;
+    cursor: not-allowed;
+  }
+}
+
+.slider-pagination{
+  width: auto;
+  font-size: fluid(18, 16);
+  font-weight: 700;
+  color: #404040;
+}

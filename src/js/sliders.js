@@ -75,10 +75,15 @@ const newsSlider = new Swiper(".news__slider", {
 
 const reviewsSlider = new Swiper(".reviews__slider", {
 	loop: false,
-	// navigation: {
-	// 	nextEl: '.news__slider--next',
-	// 	prevEl: '.news__slider--prev',
-	// },
+	pagination: {
+		el: '.reviews__slider--pagination',
+		clickable: true,
+		type: 'fraction',
+	},
+	navigation: {
+		nextEl: '.reviews__slider--next',
+		prevEl: '.reviews__slider--prev',
+	},
 	breakpoints: {
 		320: {
 			slidesPerView: 1,
