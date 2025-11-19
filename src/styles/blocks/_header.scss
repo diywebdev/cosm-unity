@@ -33,7 +33,7 @@
 
     &__nav{
         @include tablet{
-            flex-grow: 1;
+            // flex-grow: 1;
         }
         ul{
             display: flex;
@@ -57,6 +57,7 @@
                     }
                     @include tablet{
                         font-size: rem(20);
+                        padding-left: 0;
                     }
                 }
                 @include tablet{
@@ -85,10 +86,11 @@
                 flex-direction: column;
                 padding-top: rem(80);
                 padding-inline: rem(30);
-                overflow-y: auto;
                 transform: translateX(100%);
                 transition: transform var(--transition-duration);
                 box-shadow: rem(-30) 0 rem(100) rgba(#102B3B, 0.3);
+
+                @include custom-scroll;
 
                 &.isActive{
                     transform: translateX(0);
@@ -112,5 +114,31 @@
         &--search{
             position: relative;
         }
+    }
+}
+
+.contacts__menu{
+    margin-top: rem(40);
+    padding-top: rem(20);
+    border-top: 1px solid #000;
+
+    &--title{
+        font-size: rem(20);
+        line-height: 1;
+        font-weight: 600;
+        margin-bottom: rem(16);
+    }
+
+    &--link{
+        font-size: rem(18);
+        font-weight: 500;
+        display: inline-flex;
+        margin-bottom: rem(10);
+    }
+
+    .soc1al{
+        display: flex;
+        align-items: center;
+        gap: rem(20);
     }
 }
