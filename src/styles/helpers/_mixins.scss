@@ -81,3 +81,10 @@
     background-color: var(--color-accent);
   }
 }
+
+@mixin line-clamp($lines: 3) {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $lines;
+}

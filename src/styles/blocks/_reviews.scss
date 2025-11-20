@@ -63,7 +63,7 @@
             --paddingLeft: #{rem(20)};
             background-color: #D0C6AC;
             border-radius: rem(30) 0 rem(30) 0;
-            padding: var(--paddingLeft) var(--paddingLeft) var(--paddingLeft) 0;
+            padding: var(--paddingLeft);
         }
 
         &--time{
@@ -76,6 +76,7 @@
 
             @include mobile{
                 color: var(--color-text);
+                padding-left: 0;
             }
         }
 
@@ -84,6 +85,9 @@
             font-weight: 600;
             color: var(--color-dark-blue);
             padding-left: var(--paddingLeft);
+            @include mobile{
+                padding-left: 0;
+            }
         }
 
         &--content{
@@ -98,11 +102,9 @@
             max-height: rem(420);
 
             @include mobile{
-                padding-right: 0;
-                overflow: hidden;
-                display: -webkit-box;
-                -webkit-box-orient: vertical;
-                -webkit-line-clamp: 10;
+                padding-inline: 0;
+                
+                @include line-clamp(10);
             }
 
             * {
@@ -126,7 +128,7 @@
 
                 @include mobile{
                     position: absolute;
-                    left: var(--paddingLeft);
+                    left: 0;
                     top: rem(10);
                 }
             }
