@@ -1,0 +1,97 @@
+@use '../helpers' as *;
+
+.modal{
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    z-index: 1000;
+
+    display: none;
+
+    &.is-active{
+        display: block;
+    }
+
+    &__overlay{
+        position: absolute;
+        inset: 0;
+        background: rgba(187, 187, 187, 0.7);
+        backdrop-filter: blur(14.8664px);
+        z-index: 1;
+    }
+
+    &__wrapper{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 2;
+        background-color: #fff;
+        
+        &.rounded{
+            @include mobile-above{
+                border-radius: rem(26);
+            }
+        }
+    }
+
+    &__wrapper,
+    &__content{
+        > *{
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+    }
+
+    &.review-modal{
+        @include mobile-above{
+            display: none !important;
+        }
+
+        .modal__wrapper{
+            max-width: rem(768);
+            width: 100%;
+            height: 100vh;
+            padding: rem(80) rem(50);
+            background-color: #D0C6AC;
+
+            @include mobile-s{
+                padding: rem(50) rem(20);
+                padding-right: rem(10);
+            }
+
+            .reviews__slide--content{
+                padding-top: 0;
+                margin-top: rem(20);
+                display: block;
+                padding-right: rem(24);
+                max-height: none;
+                flex-grow: 1;
+
+                @include custom-scroll;
+
+                &::before{
+                    display: none;
+                }
+            }
+        }
+    }
+}
+
+
+.close-modal-btn{
+    width: rem(40);
+    height: rem(40);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    img{
+        width: 40%;
+        height: auto;
+    }
+}
