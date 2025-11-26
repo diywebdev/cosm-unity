@@ -1,49 +1,345 @@
 const popupLinks = document.querySelectorAll(".popup-link");
 const closeModalBtns = document.querySelectorAll(".close-modal-btn");
+const modalOverlays = document.querySelectorAll(".modal__overlay");
 
-if(popupLinks.length){
-    popupLinks.forEach(link => {
-        link.onclick = (e) => {
-            e.preventDefault();
-			let id = link.getAttribute("href");
-			if (id === "#" || !id) return;
-			const targetModal = document.getElementById(id.replace("#", ""));
-			if (!targetModal) return;
+// API base URL - будет заменено на реальный при интеграции с WordPress
+const API_BASE_URL = 'https://jsonplaceholder.typicode.com';
 
-            const type = link.dataset.type;
-            if(!type) return;
+/**
+ * Инициализация обработчиков для модальных окон
+ */
+function initModals() {
+    if (popupLinks.length) {
+        popupLinks.forEach(link => {
+            link.addEventListener('click', handleModalOpen);
+        });
+    }
 
-            const targetModalContent = targetModal.querySelector('.modal__content');
-            if(!targetModalContent) return;
+    // Обработчики закрытия модальных окон
+    closeModalBtns.forEach(btn => {
+        btn.addEventListener('click', handleModalClose);
+    });
 
-            switch (type) {
-                case 'review':
-                    setDataReviewModal(link, targetModalContent);
-                    break;
-            
-                default:
-                    break;
+    // Обработчики для текстовых кнопок закрытия (делегирование событий)
+    document.addEventListener('click', (e) => {
+        if (e.target.matches('.news-modal__close-text, .book-modal__close-text')) {
+            handleModalClose(e);
+        }
+    });
+
+    // Закрытие по клику на overlay
+    modalOverlays.forEach(overlay => {
+        overlay.addEventListener('click', (e) => {
+            const modal = e.target.closest('.modal');
+            if (modal) {
+                closeModal(modal);
             }
+        });
+    });
 
-            targetModal.classList.add("is-active");
-            document.documentElement.classList.add('is-lock');
-        };
+    // Закрытие по Escape
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            const activeModal = document.querySelector('.modal.is-active');
+            if (activeModal) {
+                closeModal(activeModal);
+            }
+        }
     });
 }
 
-function setDataReviewModal(link, target){
-    const content = link.closest('div').querySelector('.reviews__slide--wrapper');
-    if(!content) return;
-    target.insertAdjacentElement('afterbegin', content.cloneNode(true));   
+/**
+ * Обработчик открытия модального окна
+ */
+function handleModalOpen(e) {
+    e.preventDefault();
+    
+    const link = e.currentTarget;
+    const href = link.getAttribute("href");
+    
+    if (!href || href === "#") return;
+    
+    const modalId = href.replace("#", "");
+    const targetModal = document.getElementById(modalId);
+    if (!targetModal) return;
+
+    const type = link.dataset.type;
+    if (!type) return;
+
+    const targetModalContent = targetModal.querySelector('.modal__content');
+    if (!targetModalContent) return;
+
+    // Показываем loader если нужно загружать данные
+    const needsData = ['news', 'book'].includes(type);
+    if (needsData) {
+        showLoader(targetModalContent);
+    }
+
+    // Обработка разных типов модальных окон
+    switch (type) {
+        case 'review':
+            setDataReviewModal(link, targetModalContent);
+            openModal(targetModal);
+            break;
+        
+        case 'news':
+            const newsId = link.dataset.id || '1';
+            loadNewsData(newsId, targetModalContent).then(() => {
+                openModal(targetModal);
+            }).catch(error => {
+                console.error('Error loading news:', error);
+                showError(targetModalContent, 'Failed to load news');
+            });
+            break;
+        
+        case 'book':
+            const bookId = link.dataset.id || '1';
+            loadBookData(bookId, targetModalContent).then(() => {
+                openModal(targetModal);
+            }).catch(error => {
+                console.error('Error loading book:', error);
+                showError(targetModalContent, 'Failed to load book');
+            });
+            break;
+    
+        default:
+            break;
+    }
 }
 
-closeModalBtns.forEach(btn => {
-    btn.onclick = (e) => {
-        e.preventDefault();
-        const targetModal = btn.closest('.modal');
-        if(!targetModal) return;
-        targetModal.querySelector('.modal__content').innerHTML = '';
-        targetModal.classList.remove('is-active');
-        document.documentElement.classList.remove('is-lock');
-    };
-});
+/**
+ * Открытие модального окна
+ */
+function openModal(modal) {
+    modal.classList.add("is-active");
+    document.documentElement.classList.add('is-lock');
+}
+
+/**
+ * Обработчик закрытия модального окна
+ */
+function handleModalClose(e) {
+    e.preventDefault();
+    const targetModal = e.currentTarget.closest('.modal');
+    if (!targetModal) return;
+    closeModal(targetModal);
+}
+
+/**
+ * Закрытие модального окна
+ */
+function closeModal(modal) {
+    const modalContent = modal.querySelector('.modal__content');
+    if (modalContent) {
+        // Очищаем контент только для модальных окон с динамической загрузкой
+        const modalType = modal.id;
+        if (modalType === 'news-modal' || modalType === 'book-modal') {
+            clearModalContent(modalContent);
+        } else if (modalType === 'review-modal') {
+            modalContent.innerHTML = '';
+        }
+    }
+    modal.classList.remove('is-active');
+    document.documentElement.classList.remove('is-lock');
+}
+
+/**
+ * Установка данных для модального окна отзыва
+ */
+function setDataReviewModal(link, target) {
+    const content = link.closest('.reviews__slide').querySelector('.reviews__slide--wrapper');
+    if (!content) return;
+    
+    // Очищаем предыдущий контент
+    target.innerHTML = '';
+    target.insertAdjacentElement('afterbegin', content.cloneNode(true));
+}
+
+/**
+ * Загрузка данных новости из API
+ */
+async function loadNewsData(newsId, target) {
+    try {
+        // Используем JSONPlaceholder для тестирования
+        // В реальном проекте замените на ваш WordPress API endpoint
+        const response = await fetch(`${API_BASE_URL}/posts/${newsId}`);
+        if (!response.ok) throw new Error('Failed to fetch news');
+        
+        const data = await response.json();
+        
+        // Получаем изображение из локальных ресурсов или API
+        const newsItem = document.querySelector(`[data-type="news"][data-id="${newsId}"]`);
+        const newsImage = newsItem?.closest('.news__item')?.querySelector('.news__item--image img')?.src || '';
+        const newsDate = newsItem?.closest('.news__item')?.querySelector('time')?.getAttribute('datetime') || '';
+        
+        // Заполняем модальное окно данными
+        fillNewsModal(target, {
+            id: data.id,
+            title: data.title,
+            content: data.body,
+            image: newsImage,
+            date: newsDate || new Date().toISOString().split('T')[0]
+        });
+    } catch (error) {
+        throw error;
+    }
+}
+
+/**
+ * Заполнение модального окна новости данными
+ */
+function fillNewsModal(target, data) {
+    const imageEl = target.querySelector('.news-modal__img');
+    const dateEl = target.querySelector('.news-modal__date');
+    const titleEl = target.querySelector('.news-modal__title');
+    const contentEl = target.querySelector('.news-modal__content');
+    
+    if (imageEl && data.image) {
+        imageEl.src = data.image;
+        imageEl.alt = data.title;
+    }
+    
+    if (dateEl) {
+        dateEl.textContent = formatDate(data.date);
+        dateEl.setAttribute('datetime', data.date);
+    }
+    
+    if (titleEl) {
+        titleEl.textContent = data.title;
+    }
+    
+    if (contentEl) {
+        // Преобразуем текст в параграфы для лучшей читаемости
+        const paragraphs = data.content.split('\n').filter(p => p.trim());
+        contentEl.innerHTML = paragraphs.map(p => `<p>${p}</p>`).join('');
+    }
+}
+
+/**
+ * Загрузка данных книги из API
+ */
+async function loadBookData(bookId, target) {
+    try {
+        // Используем JSONPlaceholder для тестирования
+        // В реальном проекте замените на ваш WordPress API endpoint
+        const response = await fetch(`${API_BASE_URL}/posts/${bookId}`);
+        if (!response.ok) throw new Error('Failed to fetch book');
+        
+        const data = await response.json();
+        
+        // Получаем данные из карточки каталога
+        const bookCard = document.querySelector(`[data-type="book"][data-id="${bookId}"]`);
+        const bookImage = bookCard?.querySelector('.catalog__card--image img')?.src || '';
+        const bookTitle = bookCard?.querySelector('.catalog__card--title')?.textContent || data.title;
+        const bookAuthor = bookCard?.querySelector('.catalog__card--author')?.textContent || 'by Larisa Seklitova & Lyudmila Strelnikova';
+        const bookExcerpt = bookCard?.querySelector('.catalog__card--excerpt')?.textContent || 'Beyond the Unknown';
+        
+        // Заполняем модальное окно данными
+        fillBookModal(target, {
+            id: data.id,
+            title: bookTitle,
+            author: bookAuthor,
+            excerpt: bookExcerpt,
+            description: data.body,
+            image: bookImage
+        });
+    } catch (error) {
+        throw error;
+    }
+}
+
+/**
+ * Заполнение модального окна книги данными
+ */
+function fillBookModal(target, data) {
+    const imageEl = target.querySelector('.book-modal__img');
+    const excerptEl = target.querySelector('.book-modal__excerpt');
+    const titleEl = target.querySelector('.book-modal__title');
+    const authorEl = target.querySelector('.book-modal__author');
+    const descriptionEl = target.querySelector('.book-modal__description');
+    const buyBtn = target.querySelector('.book-modal__buy');
+    
+    if (imageEl && data.image) {
+        imageEl.src = data.image;
+        imageEl.alt = data.title;
+    }
+    
+    if (excerptEl) {
+        excerptEl.textContent = data.excerpt;
+    }
+    
+    if (titleEl) {
+        titleEl.textContent = data.title;
+    }
+    
+    if (authorEl) {
+        authorEl.textContent = data.author;
+    }
+    
+    if (descriptionEl) {
+        // Преобразуем текст в параграфы
+        const paragraphs = data.description.split('\n').filter(p => p.trim());
+        descriptionEl.innerHTML = paragraphs.map(p => `<p>${p}</p>`).join('');
+    }
+    
+    if (buyBtn) {
+        buyBtn.addEventListener('click', () => {
+            // Здесь будет логика покупки
+            console.log('Buy book:', data.id);
+        });
+    }
+}
+
+/**
+ * Показ загрузчика
+ */
+function showLoader(target) {
+    target.innerHTML = '<div class="modal-loader">Loading...</div>';
+}
+
+/**
+ * Показ ошибки
+ */
+function showError(target, message) {
+    target.innerHTML = `<div class="modal-error">${message}</div>`;
+}
+
+/**
+ * Очистка контента модального окна
+ */
+function clearModalContent(target) {
+    // Сохраняем структуру, но очищаем данные
+    const imageEl = target.querySelector('img');
+    const textEls = target.querySelectorAll('h2, h3, time, .book-modal__excerpt, .book-modal__author, .book-modal__description, .news-modal__content');
+    
+    if (imageEl) imageEl.src = '';
+    textEls.forEach(el => {
+        if (el.tagName === 'TIME') {
+            el.textContent = '';
+            el.removeAttribute('datetime');
+        } else {
+            el.textContent = '';
+        }
+    });
+    
+    const contentEl = target.querySelector('.book-modal__description, .news-modal__content');
+    if (contentEl) contentEl.innerHTML = '';
+}
+
+/**
+ * Форматирование даты
+ */
+function formatDate(dateString) {
+    if (!dateString) return '';
+    const date = new Date(dateString);
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    return `${day}/${month}`;
+}
+
+// Инициализация при загрузке DOM
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initModals);
+} else {
+    initModals();
+}
