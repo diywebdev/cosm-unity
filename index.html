@@ -117,7 +117,7 @@
               <p>At the dawn of the third millennium, as humanity undergoes a global transformation, the information found in the books published by CosmUnity sets a new direction for thought. It helps readers move beyond familiar ideas, opening new horizons of understanding, and guiding the transition from old concepts to new ones — from the earthly to the cosmic, from the dense physical world to the subtle.</p>
             </div>
           </div>
-          <a href="#catalog" class="btn">Catalog</a>
+          <a href="#catalog" class="btn popup-link" data-type="catalog">Catalog</a>
         </div>
 
         <div class="banner__right">
@@ -704,6 +704,16 @@
     </footer>
 
     <!-- MODALS BEGIN -->
+
+    <div class="modal catalog-modal" id="catalog">
+      <div class="modal__overlay"></div>
+      <div class="modal__wrapper">
+        <button type="button" class="close-modal-btn"><img src="/img/icons/close.svg" alt="Close Icon"></button>
+        <div class="modal__content">
+          <div class="catalog-filter">FILTER</div>
+        </div>
+      </div>
+    </div>
 
     <div class="modal review-modal" id="review-modal">
       <div class="modal__overlay"></div>

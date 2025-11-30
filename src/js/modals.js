@@ -77,6 +77,11 @@ function handleModalOpen(e) {
 
     // Обработка разных типов модальных окон
     switch (type) {
+        case 'catalog':
+            setDataCatalogModal(targetModalContent);
+            openModal(targetModal);
+            break;
+
         case 'review':
             setDataReviewModal(link, targetModalContent);
             openModal(targetModal);
@@ -141,6 +146,39 @@ function closeModal(modal) {
     }
     modal.classList.remove('is-active');
     document.documentElement.classList.remove('is-lock');
+}
+
+/**
+ * Установка данных для модального окна отзыва
+ */
+async function setDataCatalogModal(target) {
+    try {
+        // В реальном проекте замените на ваш WordPress API endpoint
+        // const response = await fetch(`${API_BASE_URL}/posts/${newsId}`);
+        const response = await fetch(`/catalog.json`);
+        
+        if (!response.ok) throw new Error('Failed to fetch news');
+        
+        const data = await response.json();
+
+         target.insertAdjacentHTML('beforeend', '<h2>TITLE</h2>');
+        
+        // Получаем изображение из локальных ресурсов или API
+        // const newsItem = document.querySelector(`[data-type="news"][data-id="${newsId}"]`);
+        // const newsImage = newsItem?.closest('.news__item')?.querySelector('.news__item--image img')?.src || '';
+        // const newsDate = newsItem?.closest('.news__item')?.querySelector('time')?.getAttribute('datetime') || '';
+        
+        // Заполняем модальное окно данными
+        // fillNewsModal(target, {
+        //     id: data.id,
+        //     title: data.title,
+        //     content: data.body,
+        //     image: newsImage,
+        //     date: newsDate || new Date().toISOString().split('T')[0]
+        // });
+    } catch (error) {
+        throw error;
+    }
 }
 
 /**
