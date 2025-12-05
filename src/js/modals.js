@@ -155,13 +155,40 @@ async function setDataCatalogModal(target) {
     try {
         // В реальном проекте замените на ваш WordPress API endpoint
         // const response = await fetch(`${API_BASE_URL}/posts/${newsId}`);
-        const response = await fetch(`/catalog.json`);
+        const url = window.location.hostname === 'localhost' ? `/catalog.json` : `/cosm-unity/catalog.json`
+        const response = await fetch(url);
         
         if (!response.ok) throw new Error('Failed to fetch news');
         
-        const data = await response.json();
+        const data = await response.json();        
 
-         target.insertAdjacentHTML('beforeend', '<h2>TITLE</h2>');
+        target.innerHTML = '';
+
+        let html = '<ul class="catalog__list">';
+
+        data.forEach(item => {
+            html += `
+                <li class="catalog__card">
+                    <article>
+                        <a href="#book-modal" class="catalog__card--link popup-link" data-type="book" data-id="${item.id}">
+                            <div class="catalog__card--lang">${item.lang}</div>
+                            <div class="catalog__card--image">
+                                <img src="${item.image}" width="197" height="297" loading="lazy" alt="${item.title}">
+                            </div>
+                            <div class="catalog__card--excerpt">${item.series}</div>
+                            <div class="catalog__card--content">
+                                <h3 class="catalog__card--title">${item.title}</h3>
+                                <div class="catalog__card--author">${item.author.map(a => a.name).join(' &amp; ')}</div>
+                            </div>
+                        </a>
+                    </article>
+                </li>
+            `;
+        });
+
+        html += '</ul>';        
+
+        target.insertAdjacentHTML('beforeend', html);
         
         // Получаем изображение из локальных ресурсов или API
         // const newsItem = document.querySelector(`[data-type="news"][data-id="${newsId}"]`);

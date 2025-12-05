@@ -8,12 +8,13 @@
     justify-content: center;
     background-color: var(--color-accent);
     color: var(--color-dark-blue);
-    // font-size: rem(18);
     font-weight: 600;
     padding: fluid(16, 14) rem(90);
     border-radius: rem(60);
     min-width: rem(265);
     filter: drop-shadow(0px 3.51041px 3.51041px rgba(0, 0, 0, 0.25));
+    
+    @include fluid-text(18, 16);
 
 
     @include hover {

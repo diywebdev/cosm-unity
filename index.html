@@ -295,7 +295,7 @@
           </div>
 
           <div class="catalog__more more center">
-            <a href="javascript:void(0)" class="btn">Catalog</a>
+            <a href="#catalog" class="btn popup-link" data-type="catalog">Catalog</a>
           </div>
 
         </div>
@@ -320,7 +320,7 @@
               <p>The use of new philosophical concepts contributes to the formation of cosmic consciousness in humans, corresponding to our civilization’s transition to a higher stage of development. Publications from CosmUnity Publishing are distinguished by the clarity, detail, and uniqueness of the information presented. Through this knowledge, readers can find answers to many questions of interest, including: </p>
 
               <div class="about-books__more more">
-                <a href="javascript:void(0)" class="btn">Catalog</a>
+                <a href="#catalog" class="btn popup-link" data-type="catalog">Catalog</a>
               </div>
             </div>
 
@@ -562,7 +562,7 @@
           </div>
 
           <div class="catalog__more more center">
-            <a href="javascript:void(0)" class="btn">Catalog</a>
+            <a href="#catalog" class="btn popup-link" data-type="catalog">Catalog</a>
           </div>
 
         </div>
@@ -655,7 +655,7 @@
             <nav class="footer__nav">
               <ul class="footer__nav--list">
                 <li class="footer__nav--item">
-                  <a href="#catalog" class="footer__nav--link">Catalog</a>
+                  <a href="#catalog" class="footer__nav--link popup-link" data-type="catalog">Catalog</a>
                 </li>
                 <li class="footer__nav--item">
                   <a href="#about-books" class="footer__nav--link">About the Books</a>
@@ -708,10 +708,12 @@
     <div class="modal catalog-modal" id="catalog">
       <div class="modal__overlay"></div>
       <div class="modal__wrapper">
-        <button type="button" class="close-modal-btn"><img src="/img/icons/close.svg" alt="Close Icon"></button>
-        <div class="modal__content">
+        <div class="modal__actions">
+          <h3>Catalog</h3>
           <div class="catalog-filter">FILTER</div>
+          <button type="button" class="close-modal-btn"><img src="/img/icons/close.svg" alt="Close Icon"></button>
         </div>
+        <div class="modal__content"></div>
       </div>
     </div>
 
