@@ -155,8 +155,8 @@ async function setDataCatalogModal(target) {
     try {
         // В реальном проекте замените на ваш WordPress API endpoint
         // const response = await fetch(`${API_BASE_URL}/posts/${newsId}`);
-        const url = window.location.hostname === 'localhost' ? `/catalog.json` : `/cosm-unity/catalog.json`
-        const response = await fetch(url);
+        const url = window.location.hostname === 'localhost' ? `/` : `/cosm-unity/`
+        const response = await fetch(`${url}catalog.json`);
         
         if (!response.ok) throw new Error('Failed to fetch news');
         
@@ -173,7 +173,7 @@ async function setDataCatalogModal(target) {
                         <a href="#book-modal" class="catalog__card--link popup-link" data-type="book" data-id="${item.id}">
                             <div class="catalog__card--lang">${item.lang}</div>
                             <div class="catalog__card--image">
-                                <img src="${item.image}" width="197" height="297" loading="lazy" alt="${item.title}">
+                                <img src="${url+item.image}" width="197" height="297" loading="lazy" alt="${item.title}">
                             </div>
                             <div class="catalog__card--excerpt">${item.series}</div>
                             <div class="catalog__card--content">
