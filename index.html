@@ -705,12 +705,103 @@
 
     <!-- MODALS BEGIN -->
 
-    <div class="modal catalog-modal" id="catalog">
+    <div class="modal catalog-modal is-active" id="catalog">
       <div class="modal__overlay"></div>
       <div class="modal__wrapper">
         <div class="modal__actions">
           <h3>Catalog</h3>
-          <div class="catalog-filter">FILTER</div>
+          <div class="catalog-filter">
+
+            <a href="#" class="catalog-filter__label is-active">All</a>
+            <a href="#" class="catalog-filter__label">
+              By Language
+              <div class="catalog-filter__dropdown">
+                <label class="catalog-filter__item">
+                  <span class="catalog-filter__item--row">
+                    <input type="checkbox" class="visually-hidden" value="">
+                    <span class="fake-checkbox"></span>
+                    <span class="catalog-filter__item--label">Eng</span>
+                  </span>
+                  <span class="catalog-filter__item--count">10</span>
+                </label>
+                <label class="catalog-filter__item">
+                  <span class="catalog-filter__item--row">
+                    <input type="checkbox" class="visually-hidden" value="">
+                    <span class="fake-checkbox"></span>
+                    <span class="catalog-filter__item--label">Es</span>
+                  </span>
+                  <span class="catalog-filter__item--count">10</span>
+                </label>
+                <label class="catalog-filter__item">
+                  <span class="catalog-filter__item--row">
+                    <input type="checkbox" class="visually-hidden" value="">
+                    <span class="fake-checkbox"></span>
+                    <span class="catalog-filter__item--label">De</span>
+                  </span>
+                  <span class="catalog-filter__item--count">10</span>
+                </label>
+              </div>
+            </a>
+            <a href="#" class="catalog-filter__label">
+              By Series
+              <div class="catalog-filter__dropdown">
+                <label class="catalog-filter__item">
+                  <span class="catalog-filter__item--row">
+                    <input type="checkbox" class="visually-hidden" value="">
+                    <span class="fake-checkbox"></span>
+                    <span class="catalog-filter__item--label">Series 1</span>
+                  </span>
+                  <span class="catalog-filter__item--count">4</span>
+                </label>
+                <label class="catalog-filter__item">
+                  <span class="catalog-filter__item--row">
+                    <input type="checkbox" class="visually-hidden" value="">
+                    <span class="fake-checkbox"></span>
+                    <span class="catalog-filter__item--label">Series 2</span>
+                  </span>
+                  <span class="catalog-filter__item--count">10</span>
+                </label>
+              </div>
+            </a>
+            <a href="#" class="catalog-filter__label">
+              By Author
+              <div class="catalog-filter__dropdown">
+                <label class="catalog-filter__item">
+                    <span class="catalog-filter__item--row">
+                      <input type="checkbox" class="visually-hidden" value="">
+                      <span class="fake-checkbox"></span>
+                      <span class="catalog-filter__item--label">Seklitova, Strelnikova</span>
+                    </span>
+                    <span class="catalog-filter__item--count">15</span>
+                  </label>
+                  <label class="catalog-filter__item">
+                    <span class="catalog-filter__item--row">
+                      <input type="checkbox" class="visually-hidden" value="">
+                      <span class="fake-checkbox"></span>
+                      <span class="catalog-filter__item--label">Marakhovskaya</span>
+                    </span>
+                    <span class="catalog-filter__item--count">23</span>
+                  </label>
+                  <label class="catalog-filter__item">
+                    <span class="catalog-filter__item--row">
+                      <input type="checkbox" class="visually-hidden" value="">
+                      <span class="fake-checkbox"></span>
+                      <span class="catalog-filter__item--label">Marakhovskaya, Ruziyeva</span>
+                    </span>
+                    <span class="catalog-filter__item--count">11</span>
+                  </label>
+                  <label class="catalog-filter__item">
+                    <span class="catalog-filter__item--row">
+                      <input type="checkbox" class="visually-hidden" value="">
+                      <span class="fake-checkbox"></span>
+                      <span class="catalog-filter__item--label">Author name</span>
+                    </span>
+                    <span class="catalog-filter__item--count">2</span>
+                  </label>
+                </div>
+            </a>
+
+          </div>
           <button type="button" class="close-modal-btn"><img src="/img/icons/close.svg" alt="Close Icon"></button>
         </div>
         <div class="modal__content"></div>

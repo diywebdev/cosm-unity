@@ -141,5 +141,114 @@
             }
         }
     }
+    &-filter{
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        column-gap: fluid(40, 20);
+        margin-top: rem(20);
+        margin-bottom: rem(40);
+
+        &__label{
+            color: var(--color-dark);
+            padding-block: rem(3);
+            position: relative;
+
+            @include fluid-text(18, 14);
+
+            &:hover{
+                color: var(--color-dark);
+
+                .catalog-filter__dropdown{
+                    @include show;
+                }
+
+                &::after{
+                    width: 100%;
+                }
+            }
+
+            &.is-active{
+                font-weight: bold;
+                pointer-events: none;
+            }
+
+            &::after{
+                content: '';
+                width: 0;
+                height: 1px;
+                background-color: #000;
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+                transition-duration: var(--transition-duration);
+                top: 100%;
+            }
+        }
+
+        &__dropdown{
+            position: absolute;
+            top: calc(100% + 1px);
+            min-width: 100%;
+            width: fit-content;
+            background: rgba(242, 242, 242, 0.8);
+            backdrop-filter: blur(7.45963px);
+            border-radius: 0 0 rem(14) rem(14);
+            padding: rem(15) rem(24);
+            display: grid;
+            row-gap: rem(20);
+            transition-duration: var(--transition-duration);
+            z-index: 10;
+
+            @include hide;
+        }
+
+        &__item{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: nowrap;
+            column-gap: rem(25);
+            line-height: 1;
+
+            &--row{
+                display: flex;
+                align-items: center;
+                column-gap: rem(8);
+
+                input:checked ~ .fake-checkbox::after{ opacity: 1; }
+
+                span{
+                    white-space: nowrap;
+                }
+            }
+
+            &--count{
+                font-size: rem(14);
+                font-weight: 500;
+                color: #818181;
+            }
+        }
+    }
+
+}
+
+.fake-checkbox{
+    @include square(rem(12));
+    border: 1px solid #000;
+    border-radius: rem(2);
+    position: relative;
+
+    &::after{
+        content: '';
+        position: absolute;
+        @include square(rem(9));
+        background-color: var(--color-accent);
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        transition-duration: var(--transition-duration);
+        opacity: 0;
+    }
 
 }
