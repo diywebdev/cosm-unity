@@ -165,12 +165,14 @@ async function setDataCatalogModal(target) {
         let html = '<ul class="catalog__list">';
 
         data.forEach(item => {
+            // Создаем массив ID авторов для фильтрации
+            const authorIds = item.author.map(a => a.id).join(',');
             html += `
                 <li 
                     class="catalog__card" 
                     data-lang="${item.lang}" 
                     data-series="${item.series}" 
-                    data-author="${item.author.map(a => a.name.split(' ')[1]).join(', ')}
+                    data-author-ids="${authorIds}"
                 ">
                     <article>
                         <a href="#book-modal" class="catalog__card--link popup-link" data-type="book" data-id="${item.id}">
@@ -193,7 +195,105 @@ async function setDataCatalogModal(target) {
 
         target.insertAdjacentHTML('beforeend', html);
 
+        // Собираем уникальные языки с count
+        const langMap = new Map();
+        data.forEach(item => {
+            if (!langMap.has(item.lang)) {
+                langMap.set(item.lang, 0);
+            }
+            langMap.set(item.lang, langMap.get(item.lang) + 1);
+        });
+
+        // Собираем уникальные серии с count
+        const seriesMap = new Map();
+        data.forEach(item => {
+            if (!seriesMap.has(item.series)) {
+                seriesMap.set(item.series, 0);
+            }
+            seriesMap.set(item.series, seriesMap.get(item.series) + 1);
+        });
+
+        // Собираем уникальные комбинации авторов (как они есть в книгах)
+        const authorCombinations = new Map();
+        data.forEach(item => {
+            const authorIds = item.author.map(a => a.id).sort().join(',');
+            const authorNames = item.author.map(a => a.name).join(', ');
+            if (!authorCombinations.has(authorIds)) {
+                authorCombinations.set(authorIds, { names: authorNames, count: 0 });
+            }
+            authorCombinations.get(authorIds).count++;
+        });
+
+        // Обновляем чекбоксы языков в фильтре
+        const langFilterLabel = target.parentElement.querySelector('[data-filter-type="lang"]');
+        if (langFilterLabel) {
+            const langDropdown = langFilterLabel.querySelector('.catalog-filter__dropdown');
+            if (langDropdown) {
+                langDropdown.innerHTML = '';
+                langMap.forEach((count, lang) => {
+                    const label = document.createElement('label');
+                    label.className = 'catalog-filter__item';
+                    label.innerHTML = `
+                        <span class="catalog-filter__item--row">
+                            <input type="checkbox" class="visually-hidden catalog-checkbox" value="${lang}">
+                            <span class="fake-checkbox"></span>
+                            <span class="catalog-filter__item--label">${lang}</span>
+                        </span>
+                        <span class="catalog-filter__item--count">${count}</span>
+                    `;
+                    langDropdown.appendChild(label);
+                });
+            }
+        }
+
+        // Обновляем чекбоксы серий в фильтре
+        const seriesFilterLabel = target.parentElement.querySelector('[data-filter-type="series"]');
+        if (seriesFilterLabel) {
+            const seriesDropdown = seriesFilterLabel.querySelector('.catalog-filter__dropdown');
+            if (seriesDropdown) {
+                seriesDropdown.innerHTML = '';
+                seriesMap.forEach((count, series) => {
+                    const label = document.createElement('label');
+                    label.className = 'catalog-filter__item';
+                    label.innerHTML = `
+                        <span class="catalog-filter__item--row">
+                            <input type="checkbox" class="visually-hidden catalog-checkbox" value="${series}">
+                            <span class="fake-checkbox"></span>
+                            <span class="catalog-filter__item--label">${series}</span>
+                        </span>
+                        <span class="catalog-filter__item--count">${count}</span>
+                    `;
+                    seriesDropdown.appendChild(label);
+                });
+            }
+        }
+
+        // Обновляем чекбоксы авторов в фильтре
+        const authorFilterLabel = target.parentElement.querySelector('[data-filter-type="author"]');
+        if (authorFilterLabel) {
+            const authorDropdown = authorFilterLabel.querySelector('.catalog-filter__dropdown');
+            if (authorDropdown) {
+                authorDropdown.innerHTML = '';
+                authorCombinations.forEach((authorData, authorIds) => {
+                    const label = document.createElement('label');
+                    label.className = 'catalog-filter__item';
+                    label.innerHTML = `
+                        <span class="catalog-filter__item--row">
+                            <input type="checkbox" class="visually-hidden catalog-checkbox" value="${authorIds}">
+                            <span class="fake-checkbox"></span>
+                            <span class="catalog-filter__item--label">${authorData.names}</span>
+                        </span>
+                        <span class="catalog-filter__item--count">${authorData.count}</span>
+                    `;
+                    authorDropdown.appendChild(label);
+                });
+            }
+            // Удаляем класс is-active у лейбла авторов
+            authorFilterLabel.classList.remove('is-active');
+        }
+
         const filterElements = document.querySelectorAll('.catalog-checkbox');
+        const allFilterBtn = target.parentElement.querySelector('[data-filter-type="all"]');
         const group = {
             lang: [],
             series: [],
@@ -202,30 +302,110 @@ async function setDataCatalogModal(target) {
 
         const cards = document.querySelectorAll('.catalog-modal .catalog__card');
 
+        // Функция для применения фильтров
+        function applyFilters() {
+            cards.forEach(card => {
+                const langMatch = group.lang.length === 0 || group.lang.includes(card.dataset.lang);
+                const seriesMatch = group.series.length === 0 || group.series.includes(card.dataset.series);
+                
+                // Для авторов проверяем, совпадает ли комбинация ID авторов
+                let authorMatch = true;
+                if (group.author.length > 0) {
+                    authorMatch = group.author.some(authorIds => {
+                        return authorIds === card.dataset.authorIds;
+                    });
+                }
+
+                // Карточка видна только если она соответствует всем активным фильтрам
+                if (langMatch && seriesMatch && authorMatch) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+
+            // Обновляем состояние кнопки "All"
+            const hasActiveFilters = group.lang.length > 0 || group.series.length > 0 || group.author.length > 0;
+            if (allFilterBtn) {
+                if (hasActiveFilters) {
+                    allFilterBtn.classList.remove('is-active');
+                } else {
+                    allFilterBtn.classList.add('is-active');
+                }
+            }
+
+            // Обновляем класс is-active для лейблов фильтров
+            const langLabel = target.parentElement.querySelector('[data-filter-type="lang"]');
+            const seriesLabel = target.parentElement.querySelector('[data-filter-type="series"]');
+            const authorLabelElem = target.parentElement.querySelector('[data-filter-type="author"]');
+
+            if (langLabel) {
+                if (group.lang.length > 0) {
+                    langLabel.classList.add('is-active');
+                } else {
+                    langLabel.classList.remove('is-active');
+                }
+            }
+
+            if (seriesLabel) {
+                if (group.series.length > 0) {
+                    seriesLabel.classList.add('is-active');
+                } else {
+                    seriesLabel.classList.remove('is-active');
+                }
+            }
+
+            if (authorLabelElem) {
+                if (group.author.length > 0) {
+                    authorLabelElem.classList.add('is-active');
+                } else {
+                    authorLabelElem.classList.remove('is-active');
+                }
+            }
+        }
+
+        // Обработчик для кнопки "All"
+        if (allFilterBtn) {
+            allFilterBtn.addEventListener('click', () => {
+                // Очищаем все фильтры
+                group.lang = [];
+                group.series = [];
+                group.author = [];
+
+                // Снимаем отметки со всех чекбоксов
+                filterElements.forEach(checkbox => {
+                    checkbox.checked = false;
+                });
+
+                // Показываем все карточки и обновляем кнопку
+                applyFilters();
+            });
+        }
+
         if(filterElements.length > 0){
             filterElements.forEach((item) => {
                 item.addEventListener('change', () => {
-                    const type = item.closest('.catalog-filter__label').dataset.filterType || 'all';            
-                    // item.closest('.catalog-filter__label').classList.toggle('is-active');
+                    const type = item.closest('.catalog-filter__label').dataset.filterType || 'all';
+                    const value = item.value;
+
                     if(item.checked){
-                        const value = item.value;
-                        group[type].push(value)
-                        cards.forEach(card => {
-                            if(
-                                (group.lang.length > 0 && !group.lang.join(',').includes(card.dataset.lang)) ||
-                                (group.series.length > 0 && !group.series.join(',').includes(card.dataset.series)) ||
-                                (group.author.length > 0 && !group.author.join(',').includes(card.dataset.author))
-                            ){
-                                card.classList.add('hidden');
-                            }else{
-                                card.classList.remove('hidden');
-                            }
-                        });
-                        
+                        // Добавляем значение в группу, если его там нет
+                        if (!group[type].includes(value)) {
+                            group[type].push(value);
+                        }
+                    } else {
+                        // Удаляем значение из группы
+                        group[type] = group[type].filter(v => v !== value);
                     }
+
+                    // Применяем фильтры
+                    applyFilters();
                 });
             })
         }
+
+        // Инициализируем кнопку "All" как активную
+        applyFilters();
 
     } catch (error) {
         throw error;
