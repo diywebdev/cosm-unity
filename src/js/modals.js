@@ -322,7 +322,7 @@ function showError(target, message) {
  */
 function clearModalContent(target) {
     // Сохраняем структуру, но очищаем данные
-    const imageEl = target.querySelector('img');
+    const imageEl = target.querySelector('img:not(.close-modal-btn img, .book-modal__back img)');
     const textEls = target.querySelectorAll('h2, h3, time, .book-modal__excerpt, .book-modal__author, .book-modal__description, .news-modal__content');
     
     if (imageEl) imageEl.src = '';

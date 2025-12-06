@@ -342,7 +342,7 @@
     &__info{
         display: flex;
         flex-direction: column;
-        max-height: rem(600);
+        max-height: rem(400);
         gap: rem(15);
 
         @include custom-scroll;
