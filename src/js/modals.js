@@ -251,7 +251,8 @@ async function loadBookData(bookId, target) {
             id: bookData.id,
             title: bookTitle,
             author: bookAuthor,
-            excerpt: bookExcerpt,
+            excerpt: null,
+            description: bookData.description,
             image: bookImage
         });
     } catch (error) {
@@ -267,6 +268,7 @@ function fillBookModal(target, data) {
     
     const imageEl = target.querySelector('.book-modal__img');
     const excerptEl = target.querySelector('.book-modal__excerpt');
+    const descriptionEl = target.querySelector('.book-modal__description');
     const titleEl = target.querySelector('.book-modal__title');
     const authorEl = target.querySelector('.book-modal__author');
     
@@ -275,7 +277,7 @@ function fillBookModal(target, data) {
         imageEl.alt = data.title;
     }
     
-    if (excerptEl) {
+    if (excerptEl && data.excerpt) {
         excerptEl.textContent = data.excerpt;
     }
     
@@ -287,11 +289,11 @@ function fillBookModal(target, data) {
         authorEl.textContent = data.author;
     }
     
-    // if (descriptionEl) {
-    //     // Преобразуем текст в параграфы
-    //     const paragraphs = data.description.split('\n').filter(p => p.trim());
-    //     descriptionEl.innerHTML = paragraphs.map(p => `<p>${p}</p>`).join('');
-    // }
+    if (descriptionEl) {
+        // Преобразуем текст в параграфы
+        const paragraphs = data.description.split('\n').filter(p => p.trim());
+        descriptionEl.innerHTML = paragraphs.map(p => `<p>${p}</p>`).join('');
+    }
     
     // if (buyBtn) {
     //     buyBtn.addEventListener('click', () => {
