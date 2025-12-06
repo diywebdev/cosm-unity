@@ -194,7 +194,7 @@
             background: rgba(242, 242, 242, 0.8);
             backdrop-filter: blur(7.45963px);
             border-radius: 0 0 rem(14) rem(14);
-            padding: rem(15) rem(24);
+            padding: fluid(15, 10) fluid(24, 15);
             display: grid;
             row-gap: rem(20);
             transition-duration: var(--transition-duration);

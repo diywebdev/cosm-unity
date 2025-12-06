@@ -101,7 +101,7 @@
             max-width: calc(var(--container-width) + var(--container-padding-x) * 2);
             width: 100%;
             height: 100%;
-            padding: rem(40);
+            padding: fluid(40, 15);
             display: flex;
             flex-direction: column;
             row-gap: fluid(50, 20);
