@@ -3,7 +3,7 @@ const closeModalBtns = document.querySelectorAll(".close-modal-btn");
 const modalOverlays = document.querySelectorAll(".modal__overlay");
 
 // API base URL - будет заменено на реальный при интеграции с WordPress
-const API_BASE_URL = 'https://jsonplaceholder.typicode.com';
+const API_BASE_URL = window.location.hostname === 'localhost' ? `/` : `/cosm-unity/`;
 
 /**
  * Инициализация обработчиков для модальных окон
@@ -70,7 +70,7 @@ function handleModalOpen(e) {
     if (!targetModalContent) return;
 
     // Показываем loader если нужно загружать данные
-    const needsData = ['news', 'book'].includes(type);
+    const needsData = ['news', 'book', 'catalog'].includes(type);
     if (needsData) {
         showLoader(targetModalContent);
     }
@@ -149,14 +149,12 @@ function closeModal(modal) {
 }
 
 /**
- * Установка данных для модального окна отзыва
+ * Установка данных для модального окна каталога
  */
 async function setDataCatalogModal(target) {
     try {
-        // В реальном проекте замените на ваш WordPress API endpoint
-        // const response = await fetch(`${API_BASE_URL}/posts/${newsId}`);
-        const url = window.location.hostname === 'localhost' ? `/` : `/cosm-unity/`
-        const response = await fetch(`${url}catalog.json`);
+
+        const response = await fetch(`${API_BASE_URL}catalog.json`);
         
         if (!response.ok) throw new Error('Failed to fetch news');
         
@@ -168,17 +166,22 @@ async function setDataCatalogModal(target) {
 
         data.forEach(item => {
             html += `
-                <li class="catalog__card">
+                <li 
+                    class="catalog__card" 
+                    data-lang="${item.lang}" 
+                    data-series="${item.series}" 
+                    data-author="${item.author.map(a => a.name.split(' ')[1]).join(', ')}
+                ">
                     <article>
                         <a href="#book-modal" class="catalog__card--link popup-link" data-type="book" data-id="${item.id}">
                             <div class="catalog__card--lang">${item.lang}</div>
                             <div class="catalog__card--image">
-                                <img src="${url+item.image}" width="197" height="297" loading="lazy" alt="${item.title}">
+                                <img src="${API_BASE_URL+item.image}" width="197" height="297" loading="lazy" alt="${item.title}">
                             </div>
                             <div class="catalog__card--excerpt">${item.series}</div>
                             <div class="catalog__card--content">
                                 <h3 class="catalog__card--title">${item.title}</h3>
-                                <div class="catalog__card--author">${item.author.map(a => a.name).join(' &amp; ')}</div>
+                                <div class="catalog__card--author">by ${item.author.map(a => a.name).join(' &amp; ')}</div>
                             </div>
                         </a>
                     </article>
@@ -189,20 +192,41 @@ async function setDataCatalogModal(target) {
         html += '</ul>';        
 
         target.insertAdjacentHTML('beforeend', html);
-        
-        // Получаем изображение из локальных ресурсов или API
-        // const newsItem = document.querySelector(`[data-type="news"][data-id="${newsId}"]`);
-        // const newsImage = newsItem?.closest('.news__item')?.querySelector('.news__item--image img')?.src || '';
-        // const newsDate = newsItem?.closest('.news__item')?.querySelector('time')?.getAttribute('datetime') || '';
-        
-        // Заполняем модальное окно данными
-        // fillNewsModal(target, {
-        //     id: data.id,
-        //     title: data.title,
-        //     content: data.body,
-        //     image: newsImage,
-        //     date: newsDate || new Date().toISOString().split('T')[0]
-        // });
+
+        const filterElements = document.querySelectorAll('.catalog-checkbox');
+        const group = {
+            lang: [],
+            series: [],
+            author: [],
+        };
+
+        const cards = document.querySelectorAll('.catalog-modal .catalog__card');
+
+        if(filterElements.length > 0){
+            filterElements.forEach((item) => {
+                item.addEventListener('change', () => {
+                    const type = item.closest('.catalog-filter__label').dataset.filterType || 'all';            
+                    // item.closest('.catalog-filter__label').classList.toggle('is-active');
+                    if(item.checked){
+                        const value = item.value;
+                        group[type].push(value)
+                        cards.forEach(card => {
+                            if(
+                                (group.lang.length > 0 && !group.lang.join(',').includes(card.dataset.lang)) ||
+                                (group.series.length > 0 && !group.series.join(',').includes(card.dataset.series)) ||
+                                (group.author.length > 0 && !group.author.join(',').includes(card.dataset.author))
+                            ){
+                                card.classList.add('hidden');
+                            }else{
+                                card.classList.remove('hidden');
+                            }
+                        });
+                        
+                    }
+                });
+            })
+        }
+
     } catch (error) {
         throw error;
     }

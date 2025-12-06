@@ -125,7 +125,8 @@
         }
 
         &--link{
-            display: block;
+            display: flex;
+            flex-direction: column;
             text-decoration: none;
             color: inherit;
             height: 100%;
@@ -145,18 +146,18 @@
         display: flex;
         align-items: center;
         flex-wrap: wrap;
-        column-gap: fluid(40, 20);
-        margin-top: rem(20);
-        margin-bottom: rem(40);
+        column-gap: fluid(40, 10);
+        margin-top: fluid(20, 10);
 
         &__label{
             color: var(--color-dark);
             padding-block: rem(3);
             position: relative;
+            cursor: pointer;
 
-            @include fluid-text(18, 14);
+            @include fluid-text(18, 12);
 
-            &:hover{
+            &:hover:not([data-filter-type="all"].is-active){
                 color: var(--color-dark);
 
                 .catalog-filter__dropdown{
@@ -168,9 +169,8 @@
                 }
             }
 
-            &.is-active{
+            &.is-active > span{
                 font-weight: bold;
-                pointer-events: none;
             }
 
             &::after{
@@ -215,6 +215,7 @@
                 display: flex;
                 align-items: center;
                 column-gap: rem(8);
+                @include fluid-text(14, 12);
 
                 input:checked ~ .fake-checkbox::after{ opacity: 1; }
 
@@ -224,7 +225,7 @@
             }
 
             &--count{
-                font-size: rem(14);
+                @include fluid-text(14, 12);
                 font-weight: 500;
                 color: #818181;
             }

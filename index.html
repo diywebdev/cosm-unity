@@ -710,96 +710,108 @@
       <div class="modal__wrapper">
         <div class="modal__actions">
           <h3>Catalog</h3>
+
           <div class="catalog-filter">
 
-            <a href="#" class="catalog-filter__label is-active">All</a>
-            <a href="#" class="catalog-filter__label">
-              By Language
+            <div class="catalog-filter__label" data-filter-type="all"><span>All</span></div>
+
+            <div class="catalog-filter__label" data-filter-type="lang">
+              <span>By Language</span>
               <div class="catalog-filter__dropdown">
                 <label class="catalog-filter__item">
                   <span class="catalog-filter__item--row">
-                    <input type="checkbox" class="visually-hidden" value="">
-                    <span class="fake-checkbox"></span>
-                    <span class="catalog-filter__item--label">Eng</span>
-                  </span>
-                  <span class="catalog-filter__item--count">10</span>
-                </label>
-                <label class="catalog-filter__item">
-                  <span class="catalog-filter__item--row">
-                    <input type="checkbox" class="visually-hidden" value="">
-                    <span class="fake-checkbox"></span>
-                    <span class="catalog-filter__item--label">Es</span>
-                  </span>
-                  <span class="catalog-filter__item--count">10</span>
-                </label>
-                <label class="catalog-filter__item">
-                  <span class="catalog-filter__item--row">
-                    <input type="checkbox" class="visually-hidden" value="">
+                    <input type="checkbox" class="visually-hidden catalog-checkbox" value="De">
                     <span class="fake-checkbox"></span>
                     <span class="catalog-filter__item--label">De</span>
                   </span>
-                  <span class="catalog-filter__item--count">10</span>
-                </label>
-              </div>
-            </a>
-            <a href="#" class="catalog-filter__label">
-              By Series
-              <div class="catalog-filter__dropdown">
-                <label class="catalog-filter__item">
-                  <span class="catalog-filter__item--row">
-                    <input type="checkbox" class="visually-hidden" value="">
-                    <span class="fake-checkbox"></span>
-                    <span class="catalog-filter__item--label">Series 1</span>
-                  </span>
-                  <span class="catalog-filter__item--count">4</span>
+                  <span class="catalog-filter__item--count">3</span>
                 </label>
                 <label class="catalog-filter__item">
                   <span class="catalog-filter__item--row">
-                    <input type="checkbox" class="visually-hidden" value="">
+                    <input type="checkbox" class="visually-hidden catalog-checkbox" value="En">
                     <span class="fake-checkbox"></span>
-                    <span class="catalog-filter__item--label">Series 2</span>
+                    <span class="catalog-filter__item--label">En</span>
+                  </span>
+                  <span class="catalog-filter__item--count">2</span>
+                </label>
+                <label class="catalog-filter__item">
+                  <span class="catalog-filter__item--row">
+                    <input type="checkbox" class="visually-hidden catalog-checkbox" value="Cs">
+                    <span class="fake-checkbox"></span>
+                    <span class="catalog-filter__item--label">Cs</span>
+                  </span>
+                  <span class="catalog-filter__item--count">2</span>
+                </label>
+                <label class="catalog-filter__item">
+                  <span class="catalog-filter__item--row">
+                    <input type="checkbox" class="visually-hidden catalog-checkbox" value="Es">
+                    <span class="fake-checkbox"></span>
+                    <span class="catalog-filter__item--label">Es</span>
+                  </span>
+                  <span class="catalog-filter__item--count">1</span>
+                </label>
+                <label class="catalog-filter__item">
+                  <span class="catalog-filter__item--row">
+                    <input type="checkbox" class="visually-hidden catalog-checkbox" value="Pt">
+                    <span class="fake-checkbox"></span>
+                    <span class="catalog-filter__item--label">Pt</span>
+                  </span>
+                  <span class="catalog-filter__item--count">1</span>
+                </label>
+                <label class="catalog-filter__item">
+                  <span class="catalog-filter__item--row">
+                    <input type="checkbox" class="visually-hidden catalog-checkbox" value="Sr">
+                    <span class="fake-checkbox"></span>
+                    <span class="catalog-filter__item--label">Sr</span>
+                  </span>
+                  <span class="catalog-filter__item--count">1</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="catalog-filter__label" data-filter-type="series">
+              <span>By Series</span>
+              <div class="catalog-filter__dropdown">
+                <label class="catalog-filter__item">
+                  <span class="catalog-filter__item--row">
+                    <input type="checkbox" class="visually-hidden catalog-checkbox" value="Beyond the Unknown">
+                    <span class="fake-checkbox"></span>
+                    <span class="catalog-filter__item--label">Beyond the Unknown</span>
+                  </span>
+                  <span class="catalog-filter__item--count">6</span>
+                </label>
+                <label class="catalog-filter__item">
+                  <span class="catalog-filter__item--row">
+                    <input type="checkbox" class="visually-hidden catalog-checkbox" value="The Encyclopedia of the New Era">
+                    <span class="fake-checkbox"></span>
+                    <span class="catalog-filter__item--label">The Encyclopedia of the New Era</span>
+                  </span>
+                  <span class="catalog-filter__item--count">3</span>
+                </label>
+                <label class="catalog-filter__item">
+                  <span class="catalog-filter__item--row">
+                    <input type="checkbox" class="visually-hidden catalog-checkbox" value="Healing with Codes">
+                    <span class="fake-checkbox"></span>
+                    <span class="catalog-filter__item--label">Healing with Codes</span>
+                  </span>
+                  <span class="catalog-filter__item--count">1</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="catalog-filter__label is-active" data-filter-type="author">
+              <span>By Author</span>
+              <div class="catalog-filter__dropdown">
+                <label class="catalog-filter__item">
+                  <span class="catalog-filter__item--row">
+                    <input type="checkbox" class="visually-hidden catalog-checkbox" value="Seklitova,Strelnikova" checked>
+                    <span class="fake-checkbox"></span>
+                    <span class="catalog-filter__item--label">Seklitova, Strelnikova</span>
                   </span>
                   <span class="catalog-filter__item--count">10</span>
                 </label>
               </div>
-            </a>
-            <a href="#" class="catalog-filter__label">
-              By Author
-              <div class="catalog-filter__dropdown">
-                <label class="catalog-filter__item">
-                    <span class="catalog-filter__item--row">
-                      <input type="checkbox" class="visually-hidden" value="">
-                      <span class="fake-checkbox"></span>
-                      <span class="catalog-filter__item--label">Seklitova, Strelnikova</span>
-                    </span>
-                    <span class="catalog-filter__item--count">15</span>
-                  </label>
-                  <label class="catalog-filter__item">
-                    <span class="catalog-filter__item--row">
-                      <input type="checkbox" class="visually-hidden" value="">
-                      <span class="fake-checkbox"></span>
-                      <span class="catalog-filter__item--label">Marakhovskaya</span>
-                    </span>
-                    <span class="catalog-filter__item--count">23</span>
-                  </label>
-                  <label class="catalog-filter__item">
-                    <span class="catalog-filter__item--row">
-                      <input type="checkbox" class="visually-hidden" value="">
-                      <span class="fake-checkbox"></span>
-                      <span class="catalog-filter__item--label">Marakhovskaya, Ruziyeva</span>
-                    </span>
-                    <span class="catalog-filter__item--count">11</span>
-                  </label>
-                  <label class="catalog-filter__item">
-                    <span class="catalog-filter__item--row">
-                      <input type="checkbox" class="visually-hidden" value="">
-                      <span class="fake-checkbox"></span>
-                      <span class="catalog-filter__item--label">Author name</span>
-                    </span>
-                    <span class="catalog-filter__item--count">2</span>
-                  </label>
-                </div>
-            </a>
+            </div>
 
           </div>
           <button type="button" class="close-modal-btn"><img src="/img/icons/close.svg" alt="Close Icon"></button>
@@ -873,12 +885,20 @@
 
     <!-- MODALS END-->
 
+    <!-- BOOK TOOLTIP -->
+    <div class="tooltip left bottom">
+      <div class="tooltip__content"></div>
+    </div>
+    <!-- BOOK TOOLTIP END -->
+
     <!-- Swiper JS -->
     <!-- <script src="/src/libs/swiper/swiper-bundle.min.js"></script> -->
 
     <script type="module" src="/src/js/sliders.js"></script>
     <script type="module" src="/src/js/faq.js"></script>
     <script type="module" src="/src/js/modals.js"></script>
+    <script type="module" src="/src/js/filter.js"></script>
+    <script type="module" src="/src/js/tooltip.js"></script>
     <script type="module" src="/src/js/main.js"></script>
   </body>
 </html>
