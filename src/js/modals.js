@@ -273,7 +273,7 @@ function fillBookModal(target, data) {
     const authorEl = target.querySelector('.book-modal__author');
     
     if (imageEl && data.image) {
-        imageEl.src = data.image;
+        imageEl.src = API_BASE_URL+data.image;
         imageEl.alt = data.title;
     }
     
