@@ -781,15 +781,16 @@
     <div class="modal book-modal" id="book-modal">
       <div class="modal__overlay"></div>
       <div class="modal__wrapper rounded">
-        <button type="button" class="close-modal-btn"><img src="/img/icons/close.svg" alt="Close Icon"></button>
-        <div class="modal__content">
+        <div class="modal__actions">
+          <button type="button" class="close-modal-btn"><img src="/img/icons/close.svg" alt="Close Icon"></button>
           <div class="book-modal__header">
-            <a href="#editions" class="book-modal__back">
+            <a href="#catalog" class="book-modal__back popup-link" data-type="catalog">
               <img src="/img/icons/arrow-left.svg" alt="Back">
               <span>Catalog</span>
             </a>
-            <button type="button" class="book-modal__close-text">Close</button>
           </div>
+        </div>
+        <div class="modal__content">
           <div class="book-modal__body">
             <div class="book-modal__cover">
               <img src="" alt="" class="book-modal__img">

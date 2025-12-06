@@ -2,6 +2,9 @@ const popupLinks = document.querySelectorAll(".popup-link");
 const closeModalBtns = document.querySelectorAll(".close-modal-btn");
 const modalOverlays = document.querySelectorAll(".modal__overlay");
 
+// API base URL
+const API_BASE_URL = window.location.hostname === 'localhost' ? `/` : `/cosm-unity/`;
+
 // Импортируем функцию работы с каталогом
 import { setDataCatalogModal } from './catalog.js';
 
@@ -116,6 +119,9 @@ function handleModalOpen(e) {
  * Открытие модального окна
  */
 function openModal(modal) {
+    document.querySelectorAll('.modal.is-active').forEach(m => {
+        closeModal(m);
+    });
     modal.classList.add("is-active");
     document.documentElement.classList.add('is-lock');
 }
@@ -225,27 +231,27 @@ function fillNewsModal(target, data) {
  */
 async function loadBookData(bookId, target) {
     try {
-        // Используем JSONPlaceholder для тестирования
-        // В реальном проекте замените на ваш WordPress API endpoint
-        const response = await fetch(`${API_BASE_URL}/posts/${bookId}`);
-        if (!response.ok) throw new Error('Failed to fetch book');
+        const response = await fetch(`${API_BASE_URL}catalog.json`);
+        
+        if (!response.ok) throw new Error('Failed to fetch catalog');
         
         const data = await response.json();
+
+        const bookData = data.find(item => item.id === parseInt(bookId));
+        if (!bookData) throw new Error('Book not found in catalog');
         
         // Получаем данные из карточки каталога
-        const bookCard = document.querySelector(`[data-type="book"][data-id="${bookId}"]`);
-        const bookImage = bookCard?.querySelector('.catalog__card--image img')?.src || '';
-        const bookTitle = bookCard?.querySelector('.catalog__card--title')?.textContent || data.title;
-        const bookAuthor = bookCard?.querySelector('.catalog__card--author')?.textContent || 'by Larisa Seklitova & Lyudmila Strelnikova';
-        const bookExcerpt = bookCard?.querySelector('.catalog__card--excerpt')?.textContent || 'Beyond the Unknown';
+        const bookImage = bookData.image || '';
+        const bookTitle = bookData.title;
+        const bookAuthor = 'by ' + bookData.author.map(a => a.name).join(' & ');
+        const bookExcerpt = bookData.excerpt;
         
         // Заполняем модальное окно данными
         fillBookModal(target, {
-            id: data.id,
+            id: bookData.id,
             title: bookTitle,
             author: bookAuthor,
             excerpt: bookExcerpt,
-            description: data.body,
             image: bookImage
         });
     } catch (error) {
@@ -257,12 +263,12 @@ async function loadBookData(bookId, target) {
  * Заполнение модального окна книги данными
  */
 function fillBookModal(target, data) {
+    console.log(data);
+    
     const imageEl = target.querySelector('.book-modal__img');
     const excerptEl = target.querySelector('.book-modal__excerpt');
     const titleEl = target.querySelector('.book-modal__title');
     const authorEl = target.querySelector('.book-modal__author');
-    const descriptionEl = target.querySelector('.book-modal__description');
-    const buyBtn = target.querySelector('.book-modal__buy');
     
     if (imageEl && data.image) {
         imageEl.src = data.image;
@@ -281,25 +287,25 @@ function fillBookModal(target, data) {
         authorEl.textContent = data.author;
     }
     
-    if (descriptionEl) {
-        // Преобразуем текст в параграфы
-        const paragraphs = data.description.split('\n').filter(p => p.trim());
-        descriptionEl.innerHTML = paragraphs.map(p => `<p>${p}</p>`).join('');
-    }
+    // if (descriptionEl) {
+    //     // Преобразуем текст в параграфы
+    //     const paragraphs = data.description.split('\n').filter(p => p.trim());
+    //     descriptionEl.innerHTML = paragraphs.map(p => `<p>${p}</p>`).join('');
+    // }
     
-    if (buyBtn) {
-        buyBtn.addEventListener('click', () => {
-            // Здесь будет логика покупки
-            console.log('Buy book:', data.id);
-        });
-    }
+    // if (buyBtn) {
+    //     buyBtn.addEventListener('click', () => {
+    //         // Здесь будет логика покупки
+    //         console.log('Buy book:', data.id);
+    //     });
+    // }
 }
 
 /**
  * Показ загрузчика
  */
 function showLoader(target) {
-    target.innerHTML = '<div class="modal-loader">Loading...</div>';
+    // target.innerHTML = '<div class="modal-loader">Loading...</div>';
 }
 
 /**
