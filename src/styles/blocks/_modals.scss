@@ -78,8 +78,7 @@
         }
     }
 
-    &.news-modal,
-    &.book-modal{
+    &.news-modal{
         .modal__wrapper{
             max-width: rem(1200);
             width: 90%;
@@ -245,6 +244,22 @@
 
 // Book Modal Styles
 .book-modal{
+    .modal__wrapper{
+        overflow: hidden;
+        background-color: transparent;
+        max-width: 1000px;
+        width: 100%;
+        border-radius: 0;
+        padding-left: rem(100);
+    }
+    .modal__content{
+        background-color: #ffffff;
+        padding-left: rem(180);
+        padding-right: rem(50);
+        padding-block: rem(45);
+        border-radius: rem(26);
+        // max-height: 736px;
+    }
     &__header{
         display: flex;
         justify-content: space-between;
@@ -311,10 +326,8 @@
 
     &__cover{
 
-        // @include mobile{
-        //     max-width: rem(200);
-        //     margin: 0 auto;
-        // }
+        position: absolute;
+        left: 0;
 
         img{
             position: relative;
@@ -329,33 +342,36 @@
     &__info{
         display: flex;
         flex-direction: column;
+        max-height: rem(600);
         gap: rem(15);
+
+        @include custom-scroll;
     }
 
-    &__excerpt{
-        font-size: rem(14);
+    &__series{
+        font-size: fluid(16, 14);
         font-weight: 300;
-        color: rgba(0, 0, 0, 0.55);
+        color: rgba(0, 0, 0, 0.4);
     }
 
     &__title{
-        font-size: fluid(32, 24);
-        font-weight: 600;
-        font-family: var(--font-family-base);
-        color: var(--color-dark);
-        margin: 0;
+        font-size: fluid(23, 18);
+        font-weight: 500;
+        // font-family: var(--font-family-base);
+        // color: var(--color-dark);
+        // margin: 0;
     }
 
     &__author{
         font-size: rem(16);
-        font-weight: 600;
+        font-weight: 500;
         color: rgba(0, 0, 0, 0.6);
     }
 
     &__description{
-        font-size: fluid(18, 16);
-        line-height: 1.6;
-        color: var(--color-dark);
+        // font-size: fluid(18, 16);
+        // line-height: 1.6;
+        color: var(--color-text);
         margin-bottom: rem(20);
 
         p{
