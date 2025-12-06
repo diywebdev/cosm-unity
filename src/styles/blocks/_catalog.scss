@@ -219,6 +219,8 @@
 
                 input:checked ~ .fake-checkbox::after{ opacity: 1; }
 
+                input[disabled] ~ *{ opacity: 0.3; }
+
                 span{
                     white-space: nowrap;
                 }

@@ -304,6 +304,8 @@ async function setDataCatalogModal(target) {
 
         // Функция для применения фильтров
         function applyFilters() {
+            let visibleCount = 0;
+            
             cards.forEach(card => {
                 const langMatch = group.lang.length === 0 || group.lang.includes(card.dataset.lang);
                 const seriesMatch = group.series.length === 0 || group.series.includes(card.dataset.series);
@@ -319,10 +321,33 @@ async function setDataCatalogModal(target) {
                 // Карточка видна только если она соответствует всем активным фильтрам
                 if (langMatch && seriesMatch && authorMatch) {
                     card.classList.remove('hidden');
+                    visibleCount++;
                 } else {
                     card.classList.add('hidden');
                 }
             });
+
+            // Проверяем наличие сообщения об отсутствии результатов
+            let noResultsMsg = document.querySelector('.catalog__no-results');
+            
+            if (visibleCount === 0) {
+                // Создаем сообщение, если его нет
+                if (!noResultsMsg) {
+                    noResultsMsg = document.createElement('div');
+                    noResultsMsg.className = 'catalog__no-results';
+                    noResultsMsg.textContent = 'No books found matching your filters';
+                    const catalogList = document.querySelector('.catalog__list');
+                    if (catalogList) {
+                        catalogList.parentElement.insertBefore(noResultsMsg, catalogList);
+                    }
+                }
+                noResultsMsg.style.display = 'block';
+            } else {
+                // Скрываем сообщение, если есть результаты
+                if (noResultsMsg) {
+                    noResultsMsg.style.display = 'none';
+                }
+            }
 
             // Обновляем состояние кнопки "All"
             const hasActiveFilters = group.lang.length > 0 || group.series.length > 0 || group.author.length > 0;
