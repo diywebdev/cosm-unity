@@ -101,6 +101,7 @@ function initCatalogCardLinks(target, data) {
                     title: bookData.title,
                     author: 'by ' + bookData.author.map(a => a.name).join(' & '),
                     excerpt: null,
+                    series: bookData.series || '',
                     description: bookData.description,
                     image: bookData.image,
                     url: bookData.url,

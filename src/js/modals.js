@@ -252,6 +252,7 @@ async function loadBookData(bookId, target) {
             title: bookTitle,
             author: bookAuthor,
             excerpt: null,
+            series: bookData.series || '',
             description: bookData.description,
             image: bookImage,
             url: bookData.url,
@@ -267,6 +268,7 @@ async function loadBookData(bookId, target) {
 function fillBookModal(target, data) {    
     const imageEl = target.querySelector('.book-modal__img');
     const excerptEl = target.querySelector('.book-modal__excerpt');
+    const seriesEl = target.querySelector('.book-modal__series');
     const descriptionEl = target.querySelector('.book-modal__description');
     const titleEl = target.querySelector('.book-modal__title');
     const authorEl = target.querySelector('.book-modal__author');
@@ -279,6 +281,10 @@ function fillBookModal(target, data) {
     
     if (excerptEl && data.excerpt) {
         excerptEl.textContent = data.excerpt;
+    }
+
+    if (seriesEl) {
+        seriesEl.textContent = data.series;
     }
     
     if (titleEl) {
