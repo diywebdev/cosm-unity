@@ -11,6 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CosmUnity</title>
     <link rel="stylesheet" href="/src/libs/swiper/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="/src/libs/flatpickr/flatpickr.min.css" />
     <link rel="stylesheet" href="/src/styles/main.scss">
   </head>
   <body>
@@ -368,6 +369,9 @@
       </section>
 
       <section class="section news" id="news">
+
+        <div class="preloader hidden">Loading...</div>
+
         <div class="container">
 
           <div class="section__head">
@@ -753,16 +757,12 @@
 
     <div class="modal news-modal" id="news-modal">
       <div class="modal__overlay"></div>
-      <div class="modal__wrapper rounded">
-        <button type="button" class="close-modal-btn"><img src="/img/icons/close.svg" alt="Close Icon"></button>
-        <div class="modal__content">
-          <div class="news-modal__header">
-            <a href="#news" class="news-modal__back">
-              <img src="/img/icons/arrow-left.svg" alt="Back">
-              <span>Catalog</span>
-            </a>
-            <button type="button" class="news-modal__close-text">Close</button>
-          </div>
+      <div class="modal__wrapper">
+
+        <div class="modal__actions">
+          <button type="button" class="close-modal-btn"><img src="/img/icons/close.svg" alt="Close Icon"></button> 
+        </div>
+
           <div class="news-modal__body">
             <div class="news-modal__image">
               <img src="" alt="" class="news-modal__img">
@@ -774,6 +774,7 @@
               <div class="news-modal__content"></div>
             </div>
           </div>
+
         </div>
       </div>
     </div>
@@ -796,16 +797,13 @@
 
           <div class="book-modal__body">
             <div class="book-modal__cover">
-              <img src="/img/catalog/1.webp" alt="" class="book-modal__img">
+              <img src="" alt="" class="book-modal__img">
             </div>
             <div class="book-modal__info">
-              <div class="book-modal__series">Series</div>
-              <h2 class="book-modal__title">Book Title</h2>
-              <div class="book-modal__author">by Larisa Seklitova</div>
-              <div class="book-modal__description">
-                <p>«Ahora me había tranquilizado. Ya nada me impulsaba a levantarme a medianoche. Ya no me consumía en mi propia llama. Tranquilo y solo, ahora miraba al frente sin pasear la mirada por el pasado ni el futuro. Ya no acuciaban mi mente las cosas cercanas ni las lejanas. Y a los hombres, si no me obligaban a mirarlos, no los veía. Antes, mi mente se figuraba a menudo este siglo como el tonel eternamente vacío de las Danaides, y mi alma se fundía en derroche de amor para llenar los huecos. Ahora ya no veía ningún huevo, ahora ya no me agobiaba el tedio vital. Ahora no le decía nunca más a la flor: ¡eres mi hermana! Ni a las fuentes: ¡somos de la misma raza! Ahora le daba fielmente, como un eco, a cada cosa su nombre.»</p>
-                <p>«Ahora me había tranquilizado. Ya nada me impulsaba a levantarme a medianoche. Ya no me consumía en mi propia llama. Tranquilo y solo, ahora miraba al frente sin pasear la mirada por el pasado ni el futuro. Ya no acuciaban mi mente las cosas cercanas ni las lejanas. Y a los hombres, si no me obligaban a mirarlos, no los veía. Antes, mi mente se figuraba a menudo este siglo como el tonel eternamente vacío de las Danaides, y mi alma se fundía en derroche de amor para llenar los huecos. Ahora ya no veía ningún huevo, ahora ya no me agobiaba el tedio vital. Ahora no le decía nunca más a la flor: ¡eres mi hermana! Ni a las fuentes: ¡somos de la misma raza! Ahora le daba fielmente, como un eco, a cada cosa su nombre.»</p>
-              </div>
+              <div class="book-modal__series"></div>
+              <h2 class="book-modal__title"></h2>
+              <div class="book-modal__author"></div>
+              <div class="book-modal__description"></div>
             </div>
             <a href="#" class="book-modal__buy btn" target="_blank">Buy</a>
           </div>
@@ -824,12 +822,26 @@
     <!-- Swiper JS -->
     <!-- <script src="/src/libs/swiper/swiper-bundle.min.js"></script> -->
 
+    <script>
+      const calendarSettings = {
+        enabledDates: [new Date(), '2025-12-05', '2025-12-03', '2025-11-13'],
+        locale: 'en', // 'ru' | 'en' | 'es'
+      };
+    </script>
+
+<!-- <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script> -->
+<script type="module" src="/src/libs/flatpickr/flatpickr.min.js"></script>
+<script type="module" src="/src/libs/flatpickr/l10n/en.js"></script>
+<script type="module" src="/src/libs/flatpickr/l10n/es.js"></script>
+<script type="module" src="/src/libs/flatpickr/l10n/ru.js"></script>
+
     <script type="module" src="/src/js/sliders.js"></script>
     <script type="module" src="/src/js/faq.js"></script>
     <script type="module" src="/src/js/modals.js"></script>
     <script type="module" src="/src/js/catalog.js"></script>
     <script type="module" src="/src/js/filter.js"></script>
     <script type="module" src="/src/js/tooltip.js"></script>
+    <script type="module" src="/src/js/news.js"></script>
     <script type="module" src="/src/js/main.js"></script>
   </body>
 </html>
