@@ -178,3 +178,37 @@ strong, b{
   backdrop-filter: blur(7px);
   z-index: 1000000;
 }
+
+ol:not([class]),
+ul:not([class]){
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+
+  li{
+    line-height: 1.4;
+  }
+}
+
+ol:not([class]){
+  counter-reset: custom-list-counter;
+  li{
+      counter-increment: custom-list-counter;
+
+      &::before{
+          content: counter(custom-list-counter) ". ";
+          font-weight: bold;
+      }
+  }
+}
+
+ul:not([class]){
+  li{
+      &::before{
+          content: "• ";
+          font-weight: bold;
+      }
+  }
+}

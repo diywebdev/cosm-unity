@@ -46,33 +46,6 @@ const catalogSlider = new Swiper(".catalog__slider", {
 	}
 });
 
-const newsSlider = new Swiper(".news__slider", {
-	loop: false,
-	navigation: {
-		nextEl: '.news__slider--next',
-		prevEl: '.news__slider--prev',
-	},
-	breakpoints: {
-		320: {
-			slidesPerView: 1.3,
-			spaceBetween: 20,
-		},
-		640: {
-			slidesPerView: 2.2,
-			spaceBetween: 30,
-		},
-		1024: {
-			slidesPerView: 3,
-			spaceBetween: 50,
-		},
-		1200: {
-			slidesPerView: 3,
-			spaceBetween: 110,
-		}
-	}
-});
-
-
 const reviewsSlider = new Swiper(".reviews__slider", {
 	loop: false,
 	pagination: {

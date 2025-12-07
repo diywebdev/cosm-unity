@@ -67,10 +67,11 @@ function handleModalOpen(e) {
     if (!targetModal) return;
 
     const type = link.dataset.type;
+    
     if (!type) return;
 
     const targetModalContent = targetModal.querySelector('.modal__content');
-    if (!targetModalContent) return;
+    // if (!targetModalContent) return;
 
     // Показываем loader если нужно загружать данные
     const needsData = ['news', 'book', 'catalog'].includes(type);
@@ -92,12 +93,7 @@ function handleModalOpen(e) {
         
         case 'news':
             const newsId = link.dataset.id || '1';
-            loadNewsData(newsId, targetModalContent).then(() => {
-                openModal(targetModal);
-            }).catch(error => {
-                console.error('Error loading news:', error);
-                showError(targetModalContent, 'Failed to load news');
-            });
+                loadNewsData(newsId, targetModal);
             break;
         
         case 'book':
@@ -171,28 +167,29 @@ function setDataReviewModal(link, target) {
  */
 async function loadNewsData(newsId, target) {
     try {
-        // Используем JSONPlaceholder для тестирования
-        // В реальном проекте замените на ваш WordPress API endpoint
-        const response = await fetch(`${API_BASE_URL}/posts/${newsId}`);
+        const response = await fetch(`${API_BASE_URL}news.json`);
+        
         if (!response.ok) throw new Error('Failed to fetch news');
-        
+            
         const data = await response.json();
+
+        if(data) {
+            console.log(data);
+            
+            openModal(target);
+        }
         
-        // Получаем изображение из локальных ресурсов или API
-        const newsItem = document.querySelector(`[data-type="news"][data-id="${newsId}"]`);
-        const newsImage = newsItem?.closest('.news__item')?.querySelector('.news__item--image img')?.src || '';
-        const newsDate = newsItem?.closest('.news__item')?.querySelector('time')?.getAttribute('datetime') || '';
         
         // Заполняем модальное окно данными
-        fillNewsModal(target, {
-            id: data.id,
-            title: data.title,
-            content: data.body,
-            image: newsImage,
-            date: newsDate || new Date().toISOString().split('T')[0]
-        });
+        // fillNewsModal(target, {
+        //     id: data.id,
+        //     title: data.title,
+        //     content: data.body,
+        //     image: newsImage,
+        //     date: newsDate || new Date().toISOString().split('T')[0]
+        // });
     } catch (error) {
-        throw error;
+        console.error('Error loading news:', error);
     }
 }
 
