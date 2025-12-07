@@ -347,6 +347,9 @@ function formatDate(dateString) {
     return `${day}/${month}`;
 }
 
+// Экспортируем функции для использования в других модулях
+export { openModal, fillBookModal, fillNewsModal };
+
 // Инициализация при загрузке DOM
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initModals);

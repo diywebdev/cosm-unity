@@ -1,6 +1,9 @@
 // API base URL
 const API_BASE_URL = window.location.hostname === 'localhost' ? `/` : `/cosm-unity/`;
 
+// Импортируем функции для открытия и заполнения модальных окон
+import { openModal, fillBookModal } from './modals.js';
+
 /**
  * Установка данных для модального окна каталога
  */
@@ -64,6 +67,53 @@ function renderCatalogCards(target, data) {
     html += '</ul>';
 
     target.insertAdjacentHTML('beforeend', html);
+
+    // Добавляем обработчики для новых ссылок в каталоге
+    initCatalogCardLinks(target, data);
+}
+
+/**
+ * Инициализация обработчиков для карточек каталога
+ */
+function initCatalogCardLinks(target, data) {
+    const catalogLinks = target.querySelectorAll('.catalog__card--link');
+    
+    catalogLinks.forEach(link => {
+        link.addEventListener('click', async (e) => {
+            e.preventDefault();
+            
+            const bookId = link.dataset.id;
+            const bookModal = document.getElementById('book-modal');
+            
+            if (!bookModal) return;
+            
+            const modalContent = bookModal.querySelector('.modal__content');
+            if (!modalContent) return;
+            
+            try {
+                const bookData = data.find(item => item.id === parseInt(bookId));
+                
+                if (!bookData) throw new Error('Book not found in catalog');
+                
+                // Заполняем модальное окно данными
+                fillBookModal(modalContent, {
+                    id: bookData.id,
+                    title: bookData.title,
+                    author: 'by ' + bookData.author.map(a => a.name).join(' & '),
+                    excerpt: null,
+                    description: bookData.description,
+                    image: bookData.image,
+                    url: bookData.url,
+                });
+                
+                // Открываем модальное окно
+                openModal(bookModal);
+            } catch (error) {
+                console.error('Error loading book:', error);
+                modalContent.innerHTML = `<div class="modal-error">Failed to load book</div>`;
+            }
+        });
+    });
 }
 
 /**
