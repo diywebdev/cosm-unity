@@ -240,7 +240,7 @@ async function loadBookData(bookId, target) {
         const bookData = data.find(item => item.id === parseInt(bookId));
         if (!bookData) throw new Error('Book not found in catalog');
         
-        // Получаем данные из карточки каталога
+        // Получаем данные
         const bookImage = bookData.image || '';
         const bookTitle = bookData.title;
         const bookAuthor = 'by ' + bookData.author.map(a => a.name).join(' & ');
@@ -253,7 +253,8 @@ async function loadBookData(bookId, target) {
             author: bookAuthor,
             excerpt: null,
             description: bookData.description,
-            image: bookImage
+            image: bookImage,
+            url: bookData.url,
         });
     } catch (error) {
         throw error;
@@ -263,14 +264,13 @@ async function loadBookData(bookId, target) {
 /**
  * Заполнение модального окна книги данными
  */
-function fillBookModal(target, data) {
-    console.log(data);
-    
+function fillBookModal(target, data) {    
     const imageEl = target.querySelector('.book-modal__img');
     const excerptEl = target.querySelector('.book-modal__excerpt');
     const descriptionEl = target.querySelector('.book-modal__description');
     const titleEl = target.querySelector('.book-modal__title');
     const authorEl = target.querySelector('.book-modal__author');
+    const buyBtn = target.querySelector('.book-modal__buy');
     
     if (imageEl && data.image) {
         imageEl.src = API_BASE_URL+data.image;
@@ -295,12 +295,9 @@ function fillBookModal(target, data) {
         descriptionEl.innerHTML = paragraphs.map(p => `<p>${p}</p>`).join('');
     }
     
-    // if (buyBtn) {
-    //     buyBtn.addEventListener('click', () => {
-    //         // Здесь будет логика покупки
-    //         console.log('Buy book:', data.id);
-    //     });
-    // }
+    if (buyBtn) {
+        buyBtn.href = data.url || '#';
+    }
 }
 
 /**

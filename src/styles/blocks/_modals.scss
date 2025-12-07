@@ -251,14 +251,31 @@
         width: 100%;
         border-radius: 0;
         padding-left: rem(100);
+
+        @include mobile{
+            height: 100vh;
+            padding: 0;
+        }
     }
     .modal__content{
         background-color: #ffffff;
         padding-left: rem(180);
         padding-right: rem(50);
-        padding-block: rem(45);
+        padding-block: fluid(45, 30);
         border-radius: rem(26);
-        // max-height: 736px;
+
+        @include mobile{
+            padding-inline: rem(16);
+            border-radius: 0;
+
+            > * {
+                height: auto;
+            }
+        }
+
+        @include mobile-s{
+            overflow-y: auto;
+        }
     }
     &__header{
         display: flex;
@@ -308,19 +325,17 @@
     }
 
     &__body{
-        display: grid;
-        grid-template-columns: rem(300) 1fr;
-        gap: rem(40);
         align-items: start;
 
-        @include tablet{
-            grid-template-columns: rem(250) 1fr;
-            gap: rem(30);
+        @include mobile{
+            display: grid !important;
+            grid-template-columns: 25% 1fr;
+            gap: rem(20);
         }
 
-        @include mobile{
-            grid-template-columns: 1fr;
-            gap: rem(20);
+        @include mobile-s{
+            display: flex !important;
+            flex-direction: column;
         }
     }
 
@@ -328,24 +343,46 @@
 
         position: absolute;
         left: 0;
+        border-radius: rem(22);
+        overflow: hidden;
+        background-color: var(--color-accent);
+        box-shadow: rem(20) rem(9) rem(35) rgba(0, 0, 0, 0.2);
+        max-width: rem(230);
+        width: 100%;
+        aspect-ratio: 1 / 1.5;
+
+        @include mobile{
+            position: relative;
+            min-width: rem(115);
+        }
+
+        @include mobile-s{
+            max-width: 100%;
+        }
 
         img{
-            position: relative;
-            max-width: rem(230);
-            height: auto;
-            border-radius: rem(22);
-            overflow: hidden;
-            box-shadow: 0px 9px 35px rgba(0, 0, 0, 0.2);
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center bottom;
         }
     }
 
     &__info{
         display: flex;
         flex-direction: column;
-        max-height: rem(400);
+        max-height: rem(450);
         gap: rem(15);
+        padding-right: rem(20);
 
         @include custom-scroll;
+
+        @include mobile-s{
+            overflow: hidden;
+            padding-right: 0;
+        }
     }
 
     &__series{
@@ -415,6 +452,7 @@
     position: absolute;
     top: 0;
     right: 0;
+    z-index: 10;
 
     img{
         width: 40%;
