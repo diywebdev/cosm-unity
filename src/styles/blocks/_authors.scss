@@ -1,0 +1,51 @@
+@use '../helpers' as *;
+
+.authors{
+    .section__head--title{
+        margin: 0;
+    }
+
+    &__wrapper{
+        .swiper{
+            padding: rem(55);
+        }
+        .swiper-slide{
+            height: auto;
+        }
+    }
+    
+    &__slide{
+        background: #F2F2F2;
+        box-shadow: 0px 8px 35px rgba(0, 0, 0, 0.2);
+        border-radius: rem(43) 0;
+        display: grid;
+        grid-template-columns: rem(230) auto;
+        column-gap: rem(70);
+        padding: rem(40) rem(40) rem(40) rem(60);
+        height: 100%;
+    }
+
+    &__images{
+        display: grid;
+        row-gap: rem(30);
+    }
+
+    &__box{
+        img{
+            border-radius: rem(30);
+            margin-bottom: 14px;
+        }
+    }
+
+    &__name{
+        font-weight: 600;
+        font-size: rem(19);
+        color: var(--color-dark-blue);
+    }
+
+    &__content{
+        h3{
+            margin-bottom: rem(30);
+        }
+    }
+}

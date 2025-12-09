@@ -72,6 +72,6 @@ const newsCalendar = flatpickr(".news__archive--link", {
     },
 });
 
-function reRenderNewsSliders(data, template){
-
+function reRenderNewsSliders(target, data, template){
+    if(!target || !data || !template) return;
 }
