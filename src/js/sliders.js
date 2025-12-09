@@ -75,8 +75,6 @@ const reviewsSlider = new Swiper(".reviews__slider", {
 
 const authorsSlider = new Swiper(".authors__slider", {
 	loop: false,
-	slidesPerView: 1.11,
-	spaceBetween: 50,
 	autoHeight: false,
 	pagination: {
 		el: '.authors__slider--pagination',
@@ -87,4 +85,14 @@ const authorsSlider = new Swiper(".authors__slider", {
 		nextEl: '.authors__slider--next',
 		prevEl: '.authors__slider--prev',
 	},
+	breakpoints: {
+		320: {
+			slidesPerView: 1,
+			spaceBetween: 20,
+		},
+		1024: {
+			slidesPerView: 1.11,
+			spaceBetween: 50,
+		}
+	}
 });

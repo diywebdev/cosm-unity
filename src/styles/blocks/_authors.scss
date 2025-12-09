@@ -19,8 +19,8 @@
         box-shadow: 0px 8px 35px rgba(0, 0, 0, 0.2);
         border-radius: rem(43) 0;
         display: grid;
-        grid-template-columns: rem(230) auto;
-        column-gap: rem(70);
+        grid-template-columns: fluid(230, 150) auto;
+        column-gap: fluid(70, 40);
         padding: rem(40) rem(40) rem(40) rem(60);
         height: 100%;
     }
