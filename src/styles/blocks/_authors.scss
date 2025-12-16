@@ -98,7 +98,7 @@
             @include line-clamp(7);
 
             padding-inline: var(--container-padding-x);
-            margin-top: rem(20);
+            padding-top: rem(20);
         }
 
         *{
@@ -113,5 +113,18 @@
         padding-inline: var(--container-padding-x);
         margin-top: rem(10);
         margin-bottom: rem(20);
+    }
+
+    &__slider{
+        &--nav{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: fluid(30, 10);
+
+            @include mobile{
+                margin-top: rem(20);
+            }
+        }
     }
 }

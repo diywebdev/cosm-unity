@@ -9,7 +9,7 @@
 
     &__item{
         --faqPaddingY: #{rem(10)};
-        --faqPaddingX: #{fluid(35, 22)};
+        --faqPaddingX: #{fluid(35, 16)};
 
         background-color: #fff;
         padding-block: var(--faqPaddingY);
@@ -44,7 +44,7 @@
         }
 
         &--title{
-            font-size: rem(18);
+            font-size: fluid(18, 14);
             line-height: 1;
             font-weight: 600;
         }
@@ -65,7 +65,7 @@
             visibility: hidden;
             transition: opacity 0.1s ease, max-height 0.1s ease;
             *{
-                font-size: fluid(18, 16);
+                font-size: fluid(18, 14);
                 line-height: fluid(32, 26);
             }
             p:where(:not([class]):not(:last-child)) {

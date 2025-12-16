@@ -79,7 +79,7 @@ const authorsSlider = new Swiper(".authors__slider", {
 	pagination: {
 		el: '.authors__slider--pagination',
 		clickable: true,
-		type: 'fraction',
+		type: 'bullets',
 	},
 	navigation: {
 		nextEl: '.authors__slider--next',

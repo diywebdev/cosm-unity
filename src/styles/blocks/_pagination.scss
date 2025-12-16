@@ -1,0 +1,10 @@
+@use '../helpers' as *;
+
+.slider-pagination.swiper-pagination-horizontal{
+    width: auto;
+
+    .swiper-pagination-bullet-active{
+        background: var(--color-accent);
+    }
+
+}
