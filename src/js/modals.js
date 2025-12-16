@@ -64,6 +64,7 @@ function handleModalOpen(e) {
     
     const modalId = href.replace("#", "");
     const targetModal = document.getElementById(modalId);
+    
     if (!targetModal) return;
 
     const type = link.dataset.type;
@@ -88,6 +89,11 @@ function handleModalOpen(e) {
 
         case 'review':
             setDataReviewModal(link, targetModalContent);
+            openModal(targetModal);
+            break;
+
+        case 'authors':
+            setDataAuthorsModal(link, targetModal);
             openModal(targetModal);
             break;
         
@@ -150,6 +156,17 @@ function closeModal(modal) {
     document.documentElement.classList.remove('is-lock');
 }
 
+function setDataAuthorsModal(link, target) {
+    const content = link.closest('.authors__slide');
+    if (!content) return;
+    const contentEl = target.querySelector('.authors-modal-content');
+    
+    contentEl.innerHTML = '';
+    Array.from(content.children).slice(0, -1).forEach(child => {
+        contentEl.insertAdjacentElement('beforeend', child.cloneNode(true));
+    });
+}
+
 /**
  * Установка данных для модального окна отзыва
  */
@@ -173,9 +190,7 @@ async function loadNewsData(newsId, target) {
             
         const data = await response.json();
 
-        if(data) {
-            console.log(data);
-            
+        if(data) {            
             openModal(target);
         }
         

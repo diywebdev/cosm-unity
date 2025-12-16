@@ -127,4 +127,43 @@
             }
         }
     }
-}
+
+    &-modal{
+
+        &-wrapper{
+            height: 100vh !important;
+            max-width: rem(600);
+            width: 100vw;
+            padding: rem(40) rem(20);
+        }
+
+        &-content{
+            
+            @include custom-scroll;
+
+            .authors__content{
+                overflow: visible;
+                display: block;
+                padding-left: 0;
+            }
+
+            .authors__box{
+                img{
+                    width: rem(100);
+                    aspect-ratio: 1;
+                    object-fit: cover;
+                    object-position: center top;
+                    border-radius: 50%;
+                }
+            }
+            
+            .authors__images{
+                row-gap: rem(15);
+            }
+
+            .authors__name{
+                padding: 0;
+            }
+        }
+    }
+    }
