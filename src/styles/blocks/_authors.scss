@@ -1,6 +1,19 @@
 @use '../helpers' as *;
 
 .authors{
+
+    @include mobile{
+        h2{
+            padding-inline: var(--container-padding-x);
+        }
+    }
+
+    .container{
+        @include mobile{
+            padding: 0;
+        }
+    }
+
     .section__head--title{
         margin: 0;
     }
@@ -8,6 +21,10 @@
     &__wrapper{
         .swiper{
             padding: rem(55);
+
+            @include mobile{
+                padding: rem(30) var(--container-padding-x);
+            }
         }
         .swiper-slide{
             height: auto;
@@ -20,9 +37,17 @@
         border-radius: rem(43) 0;
         display: grid;
         grid-template-columns: fluid(230, 150) auto;
+        align-items: start;
         column-gap: fluid(70, 40);
         padding: rem(40) rem(40) rem(40) rem(60);
         height: 100%;
+
+        @include mobile{
+            grid-template-columns: 1fr;
+            padding: 0;
+            overflow: hidden;
+            border-radius: rem(30);
+        }
     }
 
     &__images{
@@ -34,6 +59,19 @@
         img{
             border-radius: rem(30);
             margin-bottom: 14px;
+
+            @include mobile{
+                max-width: rem(200);
+                border-radius: rem(30) 0 rem(30) rem(30);
+            }
+        }
+
+        &:nth-child(even){
+            img{
+                @include mobile{
+                    border-radius: 0 rem(30) rem(30) rem(30);
+                }
+            }
         }
     }
 
@@ -41,11 +79,39 @@
         font-weight: 600;
         font-size: rem(19);
         color: var(--color-dark-blue);
+
+        @include mobile{
+            padding-inline: var(--container-padding-x);
+        }
     }
 
     &__content{
         h3{
             margin-bottom: rem(30);
+            
+            @include mobile{
+                display: none;
+            }
         }
+
+        @include mobile{
+            @include line-clamp(7);
+
+            padding-inline: var(--container-padding-x);
+            margin-top: rem(20);
+        }
+
+        *{
+            @include mobile{
+                font-size: rem(14);
+            }
+        }
+
+    }
+
+    &--more-link{
+        padding-inline: var(--container-padding-x);
+        margin-top: rem(10);
+        margin-bottom: rem(20);
     }
 }
